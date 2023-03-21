@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
     
   const navLink = (
+
       <>
            <li>
                 <Link to="/allUser">Users</Link>
@@ -64,6 +65,7 @@ const Navbar = () => {
               </li>
         
       </>
+      
   )
 
   return (

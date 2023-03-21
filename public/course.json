@@ -1,0 +1,25 @@
+[
+  {
+    "id": 0,
+    "courseName": "Math",
+    "courseType": "Academy",
+    "courseVideo": [
+      {
+        "id":1
+      },
+      {
+        "id":0
+      }
+    ],
+    "courseTeacher": "sobuj",
+    "courseTeacherStudy": "bba, buit",
+    "coureseDetails": "kjfhasjfhasfjhasjfh",
+    "chaptar": [
+      {
+
+      }
+    ],
+    "chaptarCout": "50",
+    "videoCount": "50"
+  }
+]

@@ -33,35 +33,57 @@ const SideNav = () => {
             </div>
 
             <li className="mt-5 mb-5 text-xl font-bold">
+
               <Link to="/" className="hover:text-blue-500"> Dashboard </Link>
+
             </li>
 
             <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+
               <Link to="/allUser"> All User </Link>
+
             </li>
 
             <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+
               <Link to=""> Student </Link>
+
             </li>            
 
             <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+
               <Link to="/academy"> Academy Post </Link>
+
             </li>
 
             <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+
+              <Link to="/coursePost"> Course Post </Link>
+
+            </li>
+
+            <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+
               <Link> Job Preparation </Link>
+
             </li>
 
             <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+
               <Link> Admission Test </Link>
+
             </li>
 
             <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+
               <Link> Book Store </Link>
+
             </li>
 
             <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+
               <Link> Question Bank </Link>
+
             </li>
 
           </ul>
