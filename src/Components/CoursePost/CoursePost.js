@@ -1,25 +1,123 @@
 import React, { useState } from "react";
 
 const CoursePost = () => {
-   
-  const [chapters, setChapter] = useState([])
+  const [chapters, setChapters] = useState([{ name: "", details: "" }]);
 
-  const chapterAddHandler = () => {
-    const chapterInput = [...chapters, []]
-    setChapter(chapterInput)
-  }
+  //handleimage
+  const [coursimg, setCoursImg] = useState();
+  const [thecherimg, setTexherImg] = useState();
+
+  ///cours img
+  const handleCourseImg = (e) => {
+    const img = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", img);
+    const url =
+      "https://api.imgbb.com/1/upload?key=1378f6494e6b39ad2fd39769a2d2ffef";
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgData) => {
+        const img = imgData.data.url;
+        setCoursImg(img);
+      })
+      .catch((e) => {
+        alert("internet  problem");
+      });
+  };
+  const handleThecherImg = (e) => {
+    const img = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", img);
+    const url =
+      "https://api.imgbb.com/1/upload?key=1378f6494e6b39ad2fd39769a2d2ffef";
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgData) => {
+        const img = imgData.data.url;
+        setTexherImg(img);
+      })
+      .catch((e) => {
+        alert("internet  problem");
+      });
+  };
+
+  const handleChapterNameChange = (index, event) => {
+    const newChapters = [...chapters];
+    newChapters[index].name = event.target.value;
+    setChapters(newChapters);
+  };
+
+  const handleChapterDetailsChange = (index, event) => {
+    const newChapters = [...chapters];
+    newChapters[index].details = event.target.value;
+    setChapters(newChapters);
+  };
+
+  const handleAddChapter = () => {
+    setChapters([...chapters, { name: "", details: "" }]);
+  };
+
+  ///key point add
+  const [keyPoint, setKeypoint] = useState([{ name: "" }]);
+
+  const handleKeypoint = () => {
+    setKeypoint([...keyPoint, { name: "", details: "" }]);
+  };
+
+  const handleKeypointName = (index, event) => {
+    const newkeyPoint = [...keyPoint];
+    newkeyPoint[index].name = event.target.value;
+    setKeypoint(newkeyPoint);
+  };
 
   const handleCourse = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-  }
+    const from = event.target;
+    const courseName = from.courseName.value;
+    const ThecherEducation = from.ThecherEducation.value;
+    const aboutCours = from.aboutCours.value;
+    const ThecherName = from.ThecherName.value;
+    const videoQuantity = from.videoqty.value;
+    const chapterQuantity = from.chapterqty.value;
 
-  const handleChapter = () => {
-    
-  }
+    const cours = {
+      courseName,
+      coursThumnil: coursimg,
+      ThecherName,
+      videolecture: chapters,
+      keyPoint: keyPoint,
+      aboutCours,
+      techerImg: thecherimg,
+      ThecherEducation,
+      aboutCours,
+      videoQuantity,
+      chapterQuantity,
+    };
+    console.log(cours);
+
+    fetch("http://localhost:5000/courses", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(cours),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
 
   return (
-
     <div>
       {/* headline */}
 
@@ -41,27 +139,6 @@ const CoursePost = () => {
                 </div>
 
                 <div className="mt-3 mb-2 grid grid-cols-1 lg:grid-cols-2 gap-3">
-
-                  <div>
-
-                    <p className="font-semibold mb-2">Course Type</p>
-
-                     <select className="select select-bordered w-full">
-
-                      <option disabled selected>
-                        Please select your course type
-                      </option>
-
-                      <option name="Academy course">Academy course</option>
-
-                      <option name="University preparation course">University preparation course</option>
-
-                      <option name="Jop preparation course">Jop preparation course</option>
-
-                     </select>
-
-                  </div>
-
                   <div>
                     <p className="font-semibold mb-2">Course Name</p>
                     <input
@@ -75,8 +152,11 @@ const CoursePost = () => {
                   <div>
                     <p className="font-semibold mb-2">Course Image</p>
                     <input
+                      onChange={handleCourseImg}
+                      accept="image/*"
                       type="file"
-                      placeholder="Course Image"
+                      name="image"
+                      id="image"
                       className="input input-bordered w-full"
                     />
                   </div>
@@ -94,6 +174,7 @@ const CoursePost = () => {
 
                     <input
                       type="text"
+                      name="ThecherName"
                       placeholder="Type here"
                       className="input input-bordered w-full"
                     />
@@ -103,8 +184,11 @@ const CoursePost = () => {
                     <p className="font-semibold mb-2">Teacher's Image</p>
 
                     <input
+                      onChange={handleThecherImg}
+                      accept="image/*"
                       type="file"
-                      placeholder="Type here"
+                      name="image"
+                      id="image"
                       className="input input-bordered w-full"
                     />
                   </div>
@@ -116,6 +200,7 @@ const CoursePost = () => {
 
                     <input
                       type="text"
+                      name="ThecherEducation"
                       placeholder="Type here"
                       className="input input-bordered w-full"
                     />
@@ -128,39 +213,64 @@ const CoursePost = () => {
                   </h1>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
-                  <input
-                    type="text"
-                    placeholder="Introduction"
-                    className="input input-bordered w-full"
-                  />
-
-                  <input
-                    type="text"
-                    placeholder="Write Some Details"
-                    className="input input-bordered w-full"
-                  />
-
-                  <input
-                    type="text"
-                    placeholder="Chapter1 Name"
-                    className="input input-bordered w-full"
-                  />
-
-                  <input
-                    type="text"
-                    placeholder="Write some Details"
-                    className="input input-bordered w-full"
-                  />
-
-                  
+                <div>
+                  {keyPoint.map((keyp, index) => (
+                    <div key={index}>
+                      <label>
+                        key point name:
+                        <input
+                          type="text"
+                          value={keyp.name}
+                          onChange={(event) => handleKeypointName(index, event)}
+                        />
+                      </label>
+                    </div>
+                  ))}
+                  <button type="button" onClick={handleKeypoint}>
+                    Add key point
+                  </button>
                 </div>
 
                 <div>
                   <textarea
+                    name="aboutCours"
                     className="textarea textarea-bordered w-full mt-5"
                     placeholder="write in more details about course"
                   ></textarea>
+                </div>
+
+                <div>
+                  <h1 className="text-xl font-semibold mt-5 lg:mt-10">
+                    Video and chapter count
+                  </h1>
+                </div>
+                <div>
+                  {chapters.map((chapter, index) => (
+                    <div key={index}>
+                      <label>
+                        Chapter {index + 1} name:
+                        <input
+                          type="text"
+                          value={chapter.name}
+                          onChange={(event) =>
+                            handleChapterNameChange(index, event)
+                          }
+                        />
+                      </label>
+                      <label>
+                        Chapter {index + 1} details:
+                        <textarea
+                          value={chapter.details}
+                          onChange={(event) =>
+                            handleChapterDetailsChange(index, event)
+                          }
+                        />
+                      </label>
+                    </div>
+                  ))}
+                  <button type="button" onClick={handleAddChapter}>
+                    Add chapter
+                  </button>
                 </div>
 
                 <div>
@@ -172,13 +282,15 @@ const CoursePost = () => {
                 <div className="grid grid-cols-2 gap-3 mt-5">
                   <input
                     type="number"
-                    placeholder="video count "
+                    name="videoqty"
+                    placeholder="video Quantity "
                     className="input input-bordered w-full"
                   />
 
                   <input
                     type="number"
-                    placeholder="chapter count"
+                    placeholder="chapter  Quantity "
+                    name="chapterqty"
                     className="input input-bordered w-full"
                   />
                 </div>
@@ -193,22 +305,6 @@ const CoursePost = () => {
           </div>
         </div>
       </div>
-     
-     <div>
-
-      <button onClick={chapterAddHandler}>Add</button>
-
-              
-      {
-        chapters.map((c, i) => {
-          return (
-            <input onChange={(e) => handleChapter(e,i)} type="text" />
-          )
-        })
-      }
-
-     </div>
-
     </div>
   );
 };
