@@ -1,0 +1,21 @@
+.add-subject{
+    background-color: aqua;
+    font-weight: 700;
+    padding: 10px 15px;
+    border-radius: 20px;
+}
+
+.add-chapter-button{
+  background-color: aqua;
+  font-weight: 700;
+  padding: 10px 15px;
+  border-radius: 20px;
+}
+
+.academy-post-button{
+  background-color: dodgerblue;
+  color: white;
+  font-weight: 700;
+  padding: 10px 30px;
+  border-radius: 10px;
+}
