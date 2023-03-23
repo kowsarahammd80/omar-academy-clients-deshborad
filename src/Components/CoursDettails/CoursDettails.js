@@ -1,5 +1,6 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
+import UploadCoursVideo from "../CoursePost/CoursVideo/UploadCoursVideo";
 
 const CoursDettails = () => {
   const data = useLoaderData();
@@ -42,13 +43,20 @@ const CoursDettails = () => {
               <h2 className="card-title">Shoes!</h2>
               <p>If a dog chews shoes whose shoes does he choose?</p>
               <div className="card-actions justify-end">
-                <div className="badge badge-outline">mange cours</div>
-                <div className="badge badge-outline">upload Video</div>
+                <button type="button" className="btn">
+                  mange cours
+                </button>
+
+                <label htmlFor="my-modal-3" className="btn">
+                  Upload-Video
+                </label>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <UploadCoursVideo data={data}></UploadCoursVideo>
     </div>
   );
 };
