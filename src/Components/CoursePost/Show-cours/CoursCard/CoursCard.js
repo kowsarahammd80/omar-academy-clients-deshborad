@@ -1,23 +1,30 @@
 import React from "react";
+import './CourseCard.css'
 import { Link } from "react-router-dom";
 
 const CoursCard = ({ cours }) => {
   const { coursThumnil, courseName, _id } = cours;
+
+
   return (
-    <div className="card w-96 bg-base-100 shadow-xl">
+    <div className="card card-compact w-full bg-base-100 shadow-xl">
+
       <figure>
-        <img src={coursThumnil} alt="Shoes" />
+        <img src={coursThumnil} alt="Shoes" className="w-full academy-course-image"/>
       </figure>
+
       <div className="card-body">
-        <h2 className="card-title">Name: {courseName}</h2>
-        <div className="card-actions justify-end">
-          <div className="badge badge-outline">
-            <Link to={`/coursdettails/${_id}`}>
-              <button>see-Dettails</button>
-            </Link>
-          </div>
+
+        <div className="card-actions justify-center">
+          
+          <Link to={`/coursdettails/${_id}`}>
+            <button className="academy-see-details-button">See Details</button>
+          </Link>{" "}
+          
         </div>
+
       </div>
+
     </div>
   );
 };
