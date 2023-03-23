@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./CoursePost.css";
 
 const CoursePost = () => {
   const [chapters, setChapters] = useState([{ name: "", details: "" }]);
@@ -208,26 +209,38 @@ const CoursePost = () => {
                 </div>
 
                 <div className="mt-5 lg:mt-10 mb-5">
+
                   <h1 className="text-xl font-semibold">
+
                     What will taught in the course and video lectures
+
                   </h1>
+
                 </div>
 
                 <div>
+
                   {keyPoint.map((keyp, index) => (
                     <div key={index}>
-                      <label>
-                        key point name:
+
+                      <label className="font-semibold">
+                        Subject name:
                         <input
                           type="text"
+                          className="input input-bordered w-full mb-3"
                           value={keyp.name}
                           onChange={(event) => handleKeypointName(index, event)}
                         />
                       </label>
+
                     </div>
                   ))}
-                  <button type="button" onClick={handleKeypoint}>
-                    Add key point
+                  <button
+                    type="button"
+                    onClick={handleKeypoint}
+                    className="add-subject mt-5 mb-2"
+                  >
+                    Add Subject Name
                   </button>
                 </div>
 
@@ -240,27 +253,31 @@ const CoursePost = () => {
                 </div>
 
                 <div>
-                  <h1 className="text-xl font-semibold mt-5 lg:mt-10">
-                    Video and chapter count
+                  <h1 className="text-xl font-semibold mt-5 lg:mt-10 mb-3">
+                    Video Lectures Intro
                   </h1>
                 </div>
-                <div>
+
+                <div className="grid grid-cols-2 gap-4">
                   {chapters.map((chapter, index) => (
                     <div key={index}>
-                      <label>
+                      <label className="font-semibold">
                         Chapter {index + 1} name:
                         <input
                           type="text"
                           value={chapter.name}
+                          className="input input-bordered w-full mb-2"
                           onChange={(event) =>
                             handleChapterNameChange(index, event)
                           }
                         />
                       </label>
-                      <label>
+
+                      <label className="font-semibold">
                         Chapter {index + 1} details:
-                        <textarea
+                        <input
                           value={chapter.details}
+                          className="input input-bordered w-full"
                           onChange={(event) =>
                             handleChapterDetailsChange(index, event)
                           }
@@ -268,10 +285,15 @@ const CoursePost = () => {
                       </label>
                     </div>
                   ))}
-                  <button type="button" onClick={handleAddChapter}>
-                    Add chapter
-                  </button>
                 </div>
+
+                <button
+                  type="button"
+                  onClick={handleAddChapter}
+                  className="add-chapter-button mt-5"
+                >
+                  Add chapter
+                </button>
 
                 <div>
                   <h1 className="text-xl font-semibold mt-5 lg:mt-10">
@@ -295,7 +317,13 @@ const CoursePost = () => {
                   />
                 </div>
 
-                <button type="submit">Post</button>
+                <div className="flex justify-center">
+
+                  <button type="submit" className="academy-post-button mt-6">
+                    Post
+                  </button>
+
+                </div>
 
                 {/*  */}
               </form>
