@@ -86,6 +86,12 @@ const SideNav = () => {
 
             </li>
 
+            <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+
+              <Link to="/coursePost/academicours"> Course View </Link>
+
+            </li>
+
           </ul>
 
     </div>

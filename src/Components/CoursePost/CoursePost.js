@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import "./CoursePost.css";
 
 const CoursePost = () => {
+
   const [chapters, setChapters] = useState([{ name: "", details: "" }]);
 
-  //handleimage
+  //heandleImage
+
   const [coursimg, setCoursImg] = useState();
   const [thecherimg, setTexherImg] = useState();
 
-  ///cours img
+  ///course img
   const handleCourseImg = (e) => {
     const img = e.target.files[0];
     const formData = new FormData();
@@ -119,7 +121,9 @@ const CoursePost = () => {
   };
 
   return (
+
     <div>
+
       {/* headline */}
 
       <div className="text-center mt-10">
