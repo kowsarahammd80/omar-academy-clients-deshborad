@@ -148,6 +148,7 @@ const CoursePost = () => {
                     <p className="font-semibold mb-2">Course Name</p>
                     <input
                       type="text"
+                      required
                       name="courseName"
                       placeholder="Course Name"
                       className="input input-bordered w-full"
@@ -157,6 +158,7 @@ const CoursePost = () => {
                   <div>
                     <p className="font-semibold mb-2">Course Image</p>
                     <input
+                    required
                       onChange={handleCourseImg}
                       accept="image/*"
                       type="file"
@@ -179,6 +181,7 @@ const CoursePost = () => {
 
                     <input
                       type="text"
+                      required
                       name="ThecherName"
                       placeholder="Type here"
                       className="input input-bordered w-full"

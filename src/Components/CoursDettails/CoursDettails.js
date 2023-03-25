@@ -1,63 +1,59 @@
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import UploadCoursVideo from "../CoursePost/CoursVideo/UploadCoursVideo";
+import Player from "./Videoplayer/Player";
 
 const CoursDettails = () => {
-  const data = useLoaderData();
+  const coursdettails = useLoaderData();
 
-  console.log(data);
+  ///get cours video
+  const { data: videos = [], refetch } = useQuery({
+    queryKey: ["videos"],
+    queryFn: async () => {
+      const res = await fetch(
+        `http://localhost:5000/coursvideo/${coursdettails._id}`
+      );
+      const data = await res.json();
+      return data;
+    },
+  });
+
   return (
-    <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-      <div className="flex flex-col items-center justify-between lg:flex-row">
-        <div className="relative lg:w-1/2">
-          <img
-            className="object-cover w-full h-56 rounded shadow-lg sm:h-96"
-            src="https://images.pexels.com/photos/927022/pexels-photo-927022.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1260"
-            alt=""
-          />
-          <a
-            href="/"
-            aria-label="Play Video"
-            className="absolute inset-0 flex items-center justify-center w-full h-full transition-colors duration-300 bg-gray-900 bg-opacity-50 group hover:bg-opacity-25"
-          >
-            <div className="flex items-center justify-center w-16 h-16 transition duration-300 transform bg-gray-100 rounded-full shadow-2xl group-hover:scale-110">
-              <svg
-                className="w-10 text-gray-900"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M16.53,11.152l-8-5C8.221,5.958,7.833,5.949,7.515,6.125C7.197,6.302,7,6.636,7,7v10 c0,0.364,0.197,0.698,0.515,0.875C7.667,17.958,7.833,18,8,18c0.184,0,0.368-0.051,0.53-0.152l8-5C16.822,12.665,17,12.345,17,12 S16.822,11.335,16.53,11.152z" />
-              </svg>
-            </div>
-          </a>
-        </div>
-        <div className="mb-10 lg:max-w-lg lg:pr-5 lg:mb-0">
-          <div className="card w-96 bg-base-100 shadow-xl">
-            <figure>
-              <img
-                src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                alt="Shoes"
-              />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title">Shoes!</h2>
-              <p>If a dog chews shoes whose shoes does he choose?</p>
-              <div className="card-actions justify-end">
-                <button type="button" className="btn">
-                  mange cours
-                </button>
+    <>
+      {" "}
+      <div
+        className="py-20 bg-no-repeat bg-cover "
+        style={{ backgroundImage: `url(${coursdettails?.coursThumnil})` }}
+      >
+        <div className="hero-content text-center text-neutral-content">
+          <div className="max-w-md">
+            <h1 className="mb-5 text-5xl font-bold">
+              {coursdettails?.courseName}
+            </h1>
+            <p className="mb-5"> {coursdettails?.aboutCours}</p>
+            <button className="btn btn-primary mr-4">Get Started</button>
 
-                <label htmlFor="my-modal-3" className="btn">
-                  Upload-Video
-                </label>
-              </div>
-            </div>
+            <label htmlFor="my-modal" className="btn">
+              Upload-Video
+            </label>
           </div>
         </div>
-      </div>
 
-      <UploadCoursVideo data={data}></UploadCoursVideo>
-    </div>
+        <div>
+          <UploadCoursVideo
+            coursdettails={coursdettails}
+            refetch={refetch}
+          ></UploadCoursVideo>
+        </div>
+      </div>
+      <div>
+        {videos?.map((video) => (
+          <Player video={video} key={video._id}></Player>
+        ))}
+      </div>
+    </>
   );
 };
 
