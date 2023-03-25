@@ -1,0 +1,22 @@
+.academy-course-image{
+
+  width: 100%;
+  height: 30vh;
+
+}
+
+.academy-see-details-button{
+
+  background-color: aqua; 
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  
+}
+
+.course-search-button{
+  background-color: blue;
+  padding: 10px 20px;
+  color: white;
+  font-weight: 700;
+}
