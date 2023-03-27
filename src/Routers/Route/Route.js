@@ -1,10 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
-import AcademyPost from "../../Components/AcademyPost/AcademyPost";
-import CoursDettails from "../../Components/CoursDettails/CoursDettails";
-import CoursePost from "../../Components/CoursePost/CoursePost";
-import UploadCoursVideo from "../../Components/CoursePost/CoursVideo/UploadCoursVideo";
-import Getacademycours from "../../Components/CoursePost/Show-cours/Getacademycours";
+import CoursePost from "../../Components/AcademyCours/CoursePost";
+import UploadCoursVideo from "../../Components/AcademyCours/CoursVideo/UploadCoursVideo";
+import Getacademycours from "../../Components/AcademyCours/Show-cours/Getacademycours";
 import Dashboard from "../../Components/Dashboard/Dashboard";
+import CoursDettails from "../../Components/GetAcademycours/CoursDettails";
 import Users from "../../Components/Users/Users";
 import Main from "../../Layout/Main/Main";
 
@@ -22,12 +21,6 @@ const routers = createBrowserRouter([
         path: "/allUser",
         element: <Users />,
       },
-
-      {
-        path: "/academy",
-        element: <AcademyPost></AcademyPost>,
-      },
-
       {
         path: "/coursePost",
         element: <CoursePost />,

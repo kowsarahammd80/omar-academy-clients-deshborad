@@ -25,9 +25,6 @@ const Navbar = () => {
                 </a>
                 <ul className="p-2 bg-blue-50">
 
-                  <li>
-                    <a> Academy Course Post </a>
-                  </li>
 
                   <li>
                     <a> University Course Post </a>
