@@ -50,7 +50,7 @@ const CoursDettails = () => {
       </div>
       <div>
         {videos?.map((video) => (
-          <Player video={video} key={video._id}></Player>
+          <Player videos={video.videos} key={video._id}></Player>
         ))}
       </div>
     </>

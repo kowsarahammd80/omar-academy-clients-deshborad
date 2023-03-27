@@ -1,43 +1,103 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 
-const Player = ({ video }) => {
-  console.log(video + "helllo ");
+const Player = ({ videos }) => {
+  const serverUrl = "http://localhost:5000";
+  const [selectedVideoIndex, setSelectedVideoIndex] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const videoRef = useRef(null);
+
+  const handleVideoClick = (index) => {
+    setSelectedVideoIndex(index);
+    setIsLoading(true);
+    if (videoRef.current) {
+      videoRef.current.load();
+      videoRef.current.play();
+    }
+  };
+
+  const handleNextClick = () => {
+    if (selectedVideoIndex < videos.length - 1) {
+      setSelectedVideoIndex(selectedVideoIndex + 1);
+      setIsLoading(true);
+      if (videoRef.current) {
+        videoRef.current.load();
+        videoRef.current.play();
+      }
+    }
+  };
+
+  const handlePreviousClick = () => {
+    if (selectedVideoIndex > 0) {
+      setSelectedVideoIndex(selectedVideoIndex - 1);
+      setIsLoading(true);
+      if (videoRef.current) {
+        videoRef.current.load();
+        videoRef.current.play();
+      }
+    }
+  };
+
+  const selectedVideo =
+    selectedVideoIndex !== null ? videos[selectedVideoIndex] : null;
 
   return (
-    <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-      <div className="flex flex-col items-center justify-between lg:flex-row">
-        <div className="mb-10 lg:max-w-lg lg:pr-5 lg:mb-0">
-          
-            
-           
-        
-        
-         
-        </div>
-        <div className="relative lg:w-1/2">
-          <img
-            className="object-cover w-full h-56 rounded shadow-lg sm:h-96"
-            src="https://images.pexels.com/photos/927022/pexels-photo-927022.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1260"
-            alt=""
-          />
-          <a
-            href="/"
-            aria-label="Play Video"
-            className="absolute inset-0 flex items-center justify-center w-full h-full transition-colors duration-300 bg-gray-900 bg-opacity-50 group hover:bg-opacity-25"
-          >
-            <div className="flex items-center justify-center w-16 h-16 transition duration-300 transform bg-gray-100 rounded-full shadow-2xl group-hover:scale-110">
-              <svg
-                className="w-10 text-gray-900"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M16.53,11.152l-8-5C8.221,5.958,7.833,5.949,7.515,6.125C7.197,6.302,7,6.636,7,7v10 c0,0.364,0.197,0.698,0.515,0.875C7.667,17.958,7.833,18,8,18c0.184,0,0.368-0.051,0.53-0.152l8-5C16.822,12.665,17,12.345,17,12 S16.822,11.335,16.53,11.152z" />
-              </svg>
+    <>
+    <div className="flex flex-row">
+      <div className="w-1/3 p-4">
+        <div className="text-lg font-medium">List of videos:</div>
+        <div className="py-2">
+          {videos?.map((video, index) => (
+            <div
+              key={video._id}
+              className="cursor-pointer hover:text-blue-500"
+              onClick={() => handleVideoClick(index)}
+            >
+              {video.title}
             </div>
-          </a>
+          ))}
         </div>
       </div>
     </div>
+    <div className="w-2/3 p-4">
+        <div className="text-lg font-medium">Video player:</div>
+        <div className="py-2">
+          {selectedVideo ? (
+            <div>
+              <div className="mb-2 font-medium">{selectedVideo.title}</div>
+              <video
+                ref={videoRef}
+                src={`${serverUrl}${selectedVideo.url}`}
+                controls
+                onCanPlay={() => setIsLoading(false)}
+                style={{ display: isLoading ? "none" : "block" }}
+              ></video>
+              {isLoading && <div>Loading...</div>}
+            </div>
+          ) : (
+            <div>Please select a video to play</div>
+          )}
+        </div>
+        <div className="flex justify-center mt-4">
+          <button
+            className="bg-gray-300 hover:bg-gray-400 rounded px-4 py-2 mr-4"
+            onClick={handlePreviousClick}
+            disabled={!selectedVideo || selectedVideoIndex === 0}
+          >
+            Previous
+          </button>
+          <button
+            className="bg-gray-300 hover:bg-gray-400 rounded px-4 py-2"
+            onClick={handleNextClick}
+            disabled={
+              !selectedVideo || selectedVideoIndex === videos.length - 1
+            }
+          >
+            Next
+          </button>
+        </div>
+      </div>
+
+</>
   );
 };
 
