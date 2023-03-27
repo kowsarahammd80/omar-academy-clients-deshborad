@@ -60,7 +60,7 @@ const CoursDettails = () => {
           {selectedVideo && <Player selectedVideo={selectedVideo}></Player>}
         </div>
 
-        <div className="xl:w-1/2 lg:w-1/2 w-full  mx-2  h-[500px] overflow-y-scroll">
+        <div className="xl:w-1/2 lg:w-1/2 w-full  mx-2  h-[500px] overflow-y-scroll ">
           {videos?.map((video, index) => (
             <PlayerList
               chapter={video}

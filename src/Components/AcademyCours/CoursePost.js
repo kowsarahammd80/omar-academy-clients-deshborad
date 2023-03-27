@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./CoursePost.css";
 
 const CoursePost = () => {
-
   const [chapters, setChapters] = useState([{ name: "", details: "" }]);
 
   //heandleImage
@@ -121,13 +120,13 @@ const CoursePost = () => {
   };
 
   return (
-
     <div>
-
       {/* headline */}
 
       <div className="text-center mt-10">
-        <h1 className="text-2xl lg:text-4xl font-semibold">Course Post here</h1>
+        <h1 className="text-2xl lg:text-4xl font-semibold">
+          Accademic Cours Post
+        </h1>
       </div>
 
       {/* post input */}
@@ -158,7 +157,7 @@ const CoursePost = () => {
                   <div>
                     <p className="font-semibold mb-2">Course Image</p>
                     <input
-                    required
+                      required
                       onChange={handleCourseImg}
                       accept="image/*"
                       type="file"
@@ -216,20 +215,14 @@ const CoursePost = () => {
                 </div>
 
                 <div className="mt-5 lg:mt-10 mb-5">
-
                   <h1 className="text-xl font-semibold">
-
                     What will taught in the course and video lectures
-
                   </h1>
-
                 </div>
 
                 <div>
-
                   {keyPoint.map((keyp, index) => (
                     <div key={index}>
-
                       <label className="font-semibold">
                         Subject name:
                         <input
@@ -239,7 +232,6 @@ const CoursePost = () => {
                           onChange={(event) => handleKeypointName(index, event)}
                         />
                       </label>
-
                     </div>
                   ))}
                   <button
@@ -325,11 +317,9 @@ const CoursePost = () => {
                 </div>
 
                 <div className="flex justify-center">
-
                   <button type="submit" className="academy-post-button mt-6">
                     Post
                   </button>
-
                 </div>
 
                 {/*  */}
