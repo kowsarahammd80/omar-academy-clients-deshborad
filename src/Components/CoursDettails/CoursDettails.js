@@ -1,12 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+
+import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import UploadCoursVideo from "../CoursePost/CoursVideo/UploadCoursVideo";
 import Player from "./Videoplayer/Player";
+import PlayerList from "./Videoplayer/PlayerList";
 
 const CoursDettails = () => {
   const coursdettails = useLoaderData();
+  const [selectedVideo, setSelectedVideo] = useState(null);
+
+  const handleVideoClick = (video) => {
+    setSelectedVideo(video);
+  };
 
   ///get cours video
   const { data: videos = [], refetch } = useQuery({
@@ -33,7 +39,7 @@ const CoursDettails = () => {
               {coursdettails?.courseName}
             </h1>
             <p className="mb-5"> {coursdettails?.aboutCours}</p>
-            <button className="btn btn-primary mr-4">Get Started</button>
+            <button className="btn btn-primary mr-4">Manage-Cours</button>
 
             <label htmlFor="my-modal" className="btn">
               Upload-Video
@@ -48,10 +54,22 @@ const CoursDettails = () => {
           ></UploadCoursVideo>
         </div>
       </div>
-      <div>
-        {videos?.map((video) => (
-          <Player videos={video.videos} key={video._id}></Player>
-        ))}
+      <div className="flex flex justify-between  flex-col lg:flex-row  xl:flex-row items-center my-20">
+        <div className="xl:w-1/2 lg:w-1/2 w-full  h-[500px] ">
+          {selectedVideo && <Player selectedVideo={selectedVideo}></Player>}
+        </div>
+
+        <div className="xl:w-1/2 lg:w-1/2 w-full  mx-2  h-[500px] overflow-y-scroll">
+          {videos?.map((video, index) => (
+            <PlayerList
+              chapter={video}
+              index={index}
+              handleVideoClick={handleVideoClick}
+              key={video._id}
+              selectedVideo={selectedVideo}
+            ></PlayerList>
+          ))}
+        </div>
       </div>
     </>
   );
