@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import AcademiDashbord from "../../Components/AcademyCours/AcademeyDashbord/AcademiDashbord";
 import CoursePost from "../../Components/AcademyCours/CoursePost";
 import UploadCoursVideo from "../../Components/AcademyCours/CoursVideo/UploadCoursVideo";
 import Getacademycours from "../../Components/AcademyCours/Show-cours/Getacademycours";
@@ -22,17 +23,18 @@ const routers = createBrowserRouter([
         element: <Users />,
       },
       {
-        path: "/coursePost",
-        element: <CoursePost />,
-      },
-
-      {
-        path: "/coursePost/academicours",
-        element: <Getacademycours></Getacademycours>,
-      },
-      {
-        path: "/coursePost/academicours/video",
-        element: <UploadCoursVideo></UploadCoursVideo>,
+        path: "/academicCours",
+        element: <AcademiDashbord></AcademiDashbord>,
+        children: [
+          {
+            path: "/academicCours",
+            element: <CoursePost></CoursePost>,
+          },
+          {
+            path: "/academicCours/getacademicCourse",
+            element: <Getacademycours></Getacademycours>,
+          },
+        ],
       },
       {
         path: "/coursdettails/:id",
