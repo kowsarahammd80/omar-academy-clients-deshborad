@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 
 import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import UploadCoursVideo from "../AcademyCours/CoursVideo/UploadCoursVideo";
+import Player from "../../../VideoPlay/Videoplayer/Player";
+import PlayerList from "../../../VideoPlay/Videoplayer/PlayerList";
+import UploadCoursVideo from "../../CoursVideo/UploadCoursVideo";
 
-import Player from "./Videoplayer/Player";
-import PlayerList from "./Videoplayer/PlayerList";
 
 const CoursDettails = () => {
   const coursdettails = useLoaderData();
