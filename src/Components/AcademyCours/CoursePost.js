@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import "./CoursePost.css";
 
 const CoursePost = () => {
   const [chapters, setChapters] = useState([{ name: "", details: "" }]);
 
+
+  const navigate=useNavigate()
   //heandleImage
 
   const [coursimg, setCoursImg] = useState();
@@ -85,6 +89,7 @@ const CoursePost = () => {
 
     const from = event.target;
     const courseName = from.courseName.value;
+    const coursPrice=from.price.value
     const ThecherEducation = from.ThecherEducation.value;
     const aboutCours = from.aboutCours.value;
     const ThecherName = from.ThecherName.value;
@@ -94,6 +99,7 @@ const CoursePost = () => {
     const cours = {
       courseName,
       coursThumnil: coursimg,
+      coursPrice,
       ThecherName,
       videolecture: chapters,
       keyPoint: keyPoint,
@@ -104,7 +110,7 @@ const CoursePost = () => {
       videoQuantity,
       chapterQuantity,
     };
-    console.log(cours);
+
 
     fetch("http://localhost:5000/academic", {
       method: "POST",
@@ -116,6 +122,9 @@ const CoursePost = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        from.reset()
+        toast.success("cours post succesfully",{autoClose:50000})
+        navigate("/academicCours/getacademicCourse")
       });
   };
 
@@ -163,6 +172,17 @@ const CoursePost = () => {
                       type="file"
                       name="image"
                       id="image"
+                      className="input input-bordered w-full"
+                    />
+                  </div>
+                  <div>
+                    <p className="font-semibold mb-2">Course Price</p>
+                    <input
+                      required
+                      placeholder="Taka:5000"
+                      name="price"
+                      type="number"
+
                       className="input input-bordered w-full"
                     />
                   </div>

@@ -32,7 +32,7 @@ const Getacademycours = () => {
       {/* card */}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-x-4 gap-y-4">
-        {Course?.map((cours) => (
+        {Course?.reverse().map((cours) => (
           <CoursCard key={cours._id} cours={cours}></CoursCard>
         ))}
       </div>
