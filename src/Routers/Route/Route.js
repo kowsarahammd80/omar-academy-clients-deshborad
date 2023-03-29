@@ -8,15 +8,30 @@ import Sign from "../../Components/User/Sign/Sign";
 import SignUp from "../../Components/User/SignUp/SignUp";
 import Users from "../../Components/Users/Users";
 import Main from "../../Layout/Main/Main";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const routers = createBrowserRouter([
+
   {
     path: "/",
-    element: <Main></Main>,
+    element: <Sign/>
+  },
+
+  {
+    path: "/signUp",
+    element: <SignUp/>
+  },
+
+  
+
+  {
+    path: "/",
+    element: <PrivateRoute><Main></Main></PrivateRoute>,
     children: [
+  
       {
-        path: "/",
-        element: <Dashboard />,
+        path: "/dashboard",
+        element: <PrivateRoute><Dashboard /></PrivateRoute>,
       },
 
       {
@@ -26,7 +41,7 @@ const routers = createBrowserRouter([
 
       {
         path: "/academicCours",
-        element: <AcademiDashbord></AcademiDashbord>,
+        element: <PrivateRoute><AcademiDashbord></AcademiDashbord></PrivateRoute>,
         children: [
           {
             path: "/academicCours",
@@ -45,15 +60,7 @@ const routers = createBrowserRouter([
         ],
       },
       
-      {
-        path: "/signUp",
-        element: <SignUp/>
-      },
-
-      {
-        path: "/signIn",
-        element: <Sign/>
-      }
+     
       
     ],
   },

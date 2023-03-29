@@ -1,8 +1,19 @@
 import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import AdminAvatar from "../../Components/AdminAvatar/AdminAvatar";
+import { AuthContext } from "../../Components/Auth/AuthProvider/AuthProvider";
 import "./SideNav.css";
 
 const SideNav = () => {
+   
+  // const { logOut } = useContext(AuthContext)
+
+  // const logOutAdmin = () => {
+  //   logOut()
+  //   .then(() => {})
+  //   .catch(e => console.error(e))
+  // }
 
   return (
 
@@ -12,33 +23,11 @@ const SideNav = () => {
 
         {/* Admin Avatar */}
 
-        <div className="">
-
-          <div className="avatar ml-10">
-
-            <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-
-              <img
-                src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"
-                alt="admin"
-              />
-
-            </div>
-
-          </div>
-
-          <div className="mt-5 mb-10 ml-5">
-
-            <p className="text-md font-semibold ">Md. Kowsar Ahamed</p>
-            <p className="text-sm font-semibold ">example@gmail.com</p>
-
-          </div>
-          
-        </div>
+        <AdminAvatar/>
 
         <li className="mt-5 mb-5 text-xl font-bold">
 
-          <Link to="/" className="hover:text-blue-500">
+          <Link to="/dashboard" className="hover:text-blue-500">
             
             Dashboard
 
@@ -54,7 +43,7 @@ const SideNav = () => {
 
         <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
 
-          <Link to=""> Student </Link>
+          <Link> Student </Link>
 
         </li>
 
@@ -93,19 +82,9 @@ const SideNav = () => {
           <Link to="/coursePost/academicours"> Course View </Link>
 
         </li>
-        
-        <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
 
-          <Link to="/signIn"> Sign In </Link>
-
-        </li>
-
-        <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
-
-          <Link to="/signUP"> Sign Up </Link>
-
-        </li>
-
+        {/* <button onClick={logOutAdmin} className="bg-red-500 mt-10 px-5 py-1 text-white font-semibold mb-5"> Log Out </button>
+         */}
       </ul>
 
     </div>
