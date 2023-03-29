@@ -1,14 +1,19 @@
 import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthProvider/AuthProvider";
 import GoogleSignIn from "../../GooleSingIn/GoogleSignIn";
 
 const SignUp = () => {
-  const { signUpUser } = useContext(AuthContext);
+  const { signUpUser, setProfile } = useContext(AuthContext);
 
   const [imageShow, setImageShow] = useState("");
+
   console.log(imageShow);
 
-  const handleImage = (e) => {
+  const navigate = useNavigate()
+
+  const handleImageHost = (e) => {
+
     const img = e.target.files[0];
     const formData = new FormData();
     formData.append("image", img);
@@ -29,7 +34,7 @@ const SignUp = () => {
       .catch((e) => console.log(e));
   };
 
-  const handleSignUp = (event) => {
+  const handleSignUp = (event,) => {
     event.preventDefault();
 
     const form = event.target;
@@ -40,15 +45,31 @@ const SignUp = () => {
 
     console.log(email, password, name);
 
-    // image post image bb
+   signUpUser(email,password)
+   .then(result => {
+     const user = result.user
+     console.log(user)
+     userSet(name, imageShow)
+     navigate('/')
+   })
+   .catch(e => console.error(e))
+  
   };
 
-  // signUpUser(email,password)
-  // .then(result => {
-  //    const user = result.user
-  //    console.log(user)
-  // })
-  // .catch(e => console.error(e))
+  const userSet = (name, imageShow) => {
+
+    const profile = {
+      displayName: name,
+      photoURL: imageShow,
+    }
+
+    setProfile(profile)
+    .then(() => {})
+    .catch(e => console.error(e))
+     
+  }
+
+
 
   return (
 
@@ -97,9 +118,9 @@ const SignUp = () => {
             <form onSubmit={handleSignUp} className="flex justify-center mt-5">
 
               <div className="w-full mx-0 lg:mx-10 xl:mx-10">
-                
+
                 <input
-                  onChange={handleImage}
+                  onChange={handleImageHost}
                   type="file"
                   name="image"
                   placeholder="image"
@@ -130,7 +151,7 @@ const SignUp = () => {
                 <div className="text-center font-bold text-red-500">
                   <p> Already have an admin account ? </p>
 
-                  <p className="text-center text-blue-500"> Sign In Now </p>
+                  <Link to="/" className="text-center text-blue-500"> Sign In Now </Link>
                 </div>
 
                 <button
