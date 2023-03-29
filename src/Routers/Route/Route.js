@@ -4,6 +4,8 @@ import CoursePost from "../../Components/AcademyCours/CoursePost";
 import CoursDettails from "../../Components/AcademyCours/Show-cours/CoursCard/CoursDettails";
 import Getacademycours from "../../Components/AcademyCours/Show-cours/Getacademycours";
 import Dashboard from "../../Components/Dashboard/Dashboard";
+import Sign from "../../Components/User/Sign/Sign";
+import SignUp from "../../Components/User/SignUp/SignUp";
 import Users from "../../Components/Users/Users";
 import Main from "../../Layout/Main/Main";
 
@@ -21,6 +23,7 @@ const routers = createBrowserRouter([
         path: "/allUser",
         element: <Users />,
       },
+
       {
         path: "/academicCours",
         element: <AcademiDashbord></AcademiDashbord>,
@@ -41,6 +44,16 @@ const routers = createBrowserRouter([
           },
         ],
       },
+      
+      {
+        path: "/signUp",
+        element: <SignUp/>
+      },
+
+      {
+        path: "/signIn",
+        element: <Sign/>
+      }
       
     ],
   },

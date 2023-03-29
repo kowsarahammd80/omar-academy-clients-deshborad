@@ -1,0 +1,9 @@
+.googleSignInButton{
+   
+  background-image: linear-gradient(to right, rgb(197, 61, 61), rgb(229, 229, 66));
+  color: white;
+  padding: 12px;
+  width: 100%;
+  font-weight: 700;
+
+}
