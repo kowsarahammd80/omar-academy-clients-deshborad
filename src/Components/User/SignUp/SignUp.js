@@ -3,7 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthProvider/AuthProvider";
 import GoogleSignIn from "../../GooleSingIn/GoogleSignIn";
 
+
+
 const SignUp = () => {
+
   const { signUpUser, setProfile } = useContext(AuthContext);
 
   const [imageShow, setImageShow] = useState("");
@@ -70,7 +73,6 @@ const SignUp = () => {
   }
 
 
-
   return (
 
     <div className="mx-3">
@@ -117,7 +119,7 @@ const SignUp = () => {
 
             <form onSubmit={handleSignUp} className="flex justify-center mt-5">
 
-              <div className="w-full mx-0 lg:mx-10 xl:mx-10">
+              <div className="w-full mx-0 lg:mx-28 xl:mx-28">
 
                 <input
                   onChange={handleImageHost}
@@ -149,19 +151,21 @@ const SignUp = () => {
                 />
 
                 <div className="text-center font-bold text-red-500">
+
                   <p> Already have an admin account ? </p>
 
-                  <Link to="/" className="text-center text-blue-500"> Sign In Now </Link>
+                      <Link to="/" className="text-center text-blue-500"> Sign In Now </Link>
+
                 </div>
 
-                <button
+                 <button
                   type="submit"
                   className="mt-8 bg-blue-400 w-full sign-in-button"
-                >
+                 >
 
                   Sign Up
 
-                </button>
+                 </button>
 
                   <GoogleSignIn/>
 
@@ -178,6 +182,7 @@ const SignUp = () => {
     </div>
 
   );
+
 };
 
 export default SignUp;

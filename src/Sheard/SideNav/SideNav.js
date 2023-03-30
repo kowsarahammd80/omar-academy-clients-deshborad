@@ -7,13 +7,15 @@ import "./SideNav.css";
 
 const SideNav = () => {
    
-  // const { logOut } = useContext(AuthContext)
+  const { logOut } = useContext(AuthContext)
 
-  // const logOutAdmin = () => {
-  //   logOut()
-  //   .then(() => {})
-  //   .catch(e => console.error(e))
-  // }
+  const logOutAdmin = () => {
+
+    logOut()
+    .then(() => {})
+    .catch(e => console.error(e))
+    
+  }
 
   return (
 
@@ -83,8 +85,8 @@ const SideNav = () => {
 
         </li>
 
-        {/* <button onClick={logOutAdmin} className="bg-red-500 mt-10 px-5 py-1 text-white font-semibold mb-5"> Log Out </button>
-         */}
+        <button onClick={logOutAdmin} className="bg-red-500 mt-10 px-5 py-1 text-white font-semibold mb-5"> Log Out </button>
+        
       </ul>
 
     </div>
