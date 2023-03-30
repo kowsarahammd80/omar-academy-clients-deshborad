@@ -64,7 +64,7 @@ const Sign = () => {
               onSubmit={handleAdminLogin}
               className="flex justify-center mt-5"
             >
-              <div className="w-full mx-0 lg:mx-10 xl:mx-10">
+              <div className="w-full mx-0 lg:mx-28 xl:mx-28">
                 <input
                   type="text"
                   name="email"
