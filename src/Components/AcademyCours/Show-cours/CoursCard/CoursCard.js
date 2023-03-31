@@ -11,7 +11,7 @@ const CoursCard = ({ cours }) => {
         <img
           src={coursThumnil}
           alt="Shoes"
-          className="w-full academy-course-image"
+          className="w-full object-cover academy-course-image"
         />
       </figure>
 

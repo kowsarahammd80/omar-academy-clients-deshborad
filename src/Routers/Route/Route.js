@@ -3,11 +3,17 @@ import AcademiDashbord from "../../Components/AcademyCours/AcademeyDashbord/Acad
 import CoursePost from "../../Components/AcademyCours/CoursePost";
 import CoursDettails from "../../Components/AcademyCours/Show-cours/CoursCard/CoursDettails";
 import Getacademycours from "../../Components/AcademyCours/Show-cours/Getacademycours";
+import AddThecher from "../../Components/AddThecher/AddThecher";
+import DisplayThecher from "../../Components/AddThecher/DisplayThecher";
+import Alladmin from "../../Components/AdminAvatar/GetallAdmin/Alladmin";
 import Dashboard from "../../Components/Dashboard/Dashboard";
 import Sign from "../../Components/User/Sign/Sign";
 import SignUp from "../../Components/User/SignUp/SignUp";
 import Users from "../../Components/Users/Users";
+import UserLayot from "../../Components/Users/UsersLayot/UserLayot";
+import Wellcome from "../../Components/Wellcome/Wellcome";
 import Main from "../../Layout/Main/Main";
+import AdminRoute from "../PrivateRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const routers = createBrowserRouter([
@@ -31,13 +37,34 @@ const routers = createBrowserRouter([
   
       {
         path: "/dashboard",
-        element: <PrivateRoute><Dashboard /></PrivateRoute>,
+        element: <PrivateRoute><Wellcome></Wellcome></PrivateRoute>,
       },
-
+    { 
+            path:"/thecher",
+            element:<AddThecher></AddThecher>
+          },
+     {
+      path:"/allusers",
+      element:<UserLayot></UserLayot>,
+      children:[{
+        path: "/allusers",
+        element:<AdminRoute><Users/></AdminRoute>
+      },
       {
-        path: "/allUser",
-        element: <Users />,
+        path:"/allusers/thecher",
+        element:<DisplayThecher></DisplayThecher>
       },
+      {
+        path:"/allusers/admin",
+        element:<Alladmin></Alladmin>
+      }
+      
+    
+    
+    ]
+     }
+        
+      ,
 
       {
         path: "/academicCours",

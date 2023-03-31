@@ -1,6 +1,74 @@
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
+import { toast } from "react-hot-toast";
+import Confirmation from "../../Sheard/ConfirmationModal/Confirmation";
+import User from "./User";
 
 const Users = () => {
+    
+
+   const [deletinguser,setDeletinguser]=useState(null)
+  
+   const closemodal=()=>{
+    setDeletinguser(null)
+   }
+
+   const  deletUser=user=>{
+     fetch(`http://localhost:5000/deletuser/${user?._id}`,{
+      method:"DELETE",
+      headers:{
+        authorization:`bearer ${localStorage.getItem("accessToken")}`
+      }
+     })
+     .then(res=>res.json())
+     .then(data=>{
+     console.log(data)
+     if(data.deletedCount >0){
+      toast.success(`${user?.name} Deleted succesfully`)
+      refetch()
+     }
+     })
+
+   }
+     
+ 
+    
+
+
+
+
+  const {data:alluser=[],  isLoading,refetch}=useQuery({
+    queryKey:["alluser"],
+    queryFn:async()=>{
+    const res= await fetch("http://localhost:5000/alluser",{
+       headers:{
+        authorization:`bearer ${localStorage.getItem("accessToken")}`
+       }
+      })
+      const data=await res.json()
+      return data
+    }
+  })
+   const makeAdmin=(id)=>{
+      fetch(`http://localhost:5000/user/admin/${id}`,{
+        method:"PUT",
+        headers:{
+          authorization:`bearer ${localStorage.getItem("accessToken")}`
+        }
+
+      })
+      .then(res=>res.json())
+      .then(data=>{
+        console.log(data)
+        refetch()
+        if(data.acknowledge){
+          toast.success("make admin succefully")
+        }
+      })
+
+   }
+ 
+
   return (
     <div>
       {/* headline */}
@@ -17,6 +85,16 @@ const Users = () => {
 
         <div className="overflow-x-auto w-full">
 
+
+
+   
+
+ 
+
+
+
+
+
           <table className="table w-full">
 
             {/* head */}
@@ -29,68 +107,18 @@ const Users = () => {
                 </th>
 
                 <th>Name</th>
-                <th>email</th>
+                <th>Email</th>
                 <th>Phone Number</th>
-                <th>User Type</th>
-
+         
+                 <th>Admin</th>
+                 <th>Delete</th>
               </tr>
-
             </thead>
-
             <tbody>
-
-              {/* row 1 */}
-              
-              <tr>
-
-                <th>
-
-                <div className="avatar">
-                      <div className="mask mask-squircle w-12 h-12">
-                        <img
-                          src="https://thumbs.dreamstime.com/z/cute-girl-backpack-29662670.jpg"
-                          alt="Avatar Tailwind CSS Component"
-                        />
-                      </div>
-                    </div>
-                 
-                </th>
-
-                <td>
-
-                  <div className="flex items-center space-x-3">
-                    
-
-                    <div>
-
-                      <div className="font-bold">Aftab Nagar</div>
-                      <div className="text-md">Dhaka</div>
-
-                    </div>
-
-                  </div>
-                </td>
-
-                <td>
-                  example@gmail.com
-                  <br />
-                  <span className="badge badge-ghost badge-sm">
-                    Collage Student
-                  </span>
-                </td>
-
-                <td>O1234567890</td>
-
-                <th>
-                  <button className="btn btn-ghost btn-xs">Normal Users</button>
-                </th>
-
-              </tr>
-              {/* row 2 */}
-              
-              {/* row 3 */}
-              
-              {/* row 4 */}
+            {
+  alluser?.map(user=> <User makeAdmin={makeAdmin} setDeletinguser={setDeletinguser}  key={user._id} user={user}> </User>)
+ }
+               
               
             </tbody>
             {/* foot */}
@@ -98,6 +126,19 @@ const Users = () => {
           </table>
         </div>
       </div>
+
+ {
+  deletinguser && <Confirmation 
+  closemodal={ closemodal}
+   title={"Are you sure you  want  to delete ?? "}
+    img={deletinguser.photoURL}
+   msg={`If you want to delete  ${deletinguser.name} it cannot be undone` }
+    successAction={deletUser}
+    modalData={deletinguser}
+
+  ></Confirmation>
+ }
+
     </div>
   );
 };
