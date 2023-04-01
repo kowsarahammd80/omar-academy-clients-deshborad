@@ -1,5 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { saveuserInfo } from "../../../api/userinfo/userinfo";
+import useToken from "../../../CustomHook/useToken";
 import { AuthContext } from "../../Auth/AuthProvider/AuthProvider";
 import GoogleSignIn from "../../GooleSingIn/GoogleSignIn";
 import "./SignIn.css";
@@ -8,6 +10,16 @@ const Sign = () => {
   const { loginUser, loading, setLoading} = useContext(AuthContext);
 
   const navigate = useNavigate()
+   
+    const[singinEmail,setSinginEmail]=useState("")
+    const[token]=useToken(singinEmail)
+
+
+
+      if(token){
+        navigate('/dashboard')
+      }
+
 
   const handleAdminLogin = (event) => {
     event.preventDefault();
@@ -21,11 +33,26 @@ const Sign = () => {
       
       const user = result.user;
       console.log(user);
+
+      const information = {
+        name: user.displayName,
+        email: user.email,
+        uid: user.uid,
+        photoURL: user.photoURL,
+      };
+
+     //get  token 
+
+     setSinginEmail(user?.email)
+
+
+       ///sava info data base
+      saveuserInfo(information)
      
       if(loading){
         return <h1>loading...</h1>
       }
-      navigate('/dashboard')
+    
       
     })
     .catch(e => console.error(e))

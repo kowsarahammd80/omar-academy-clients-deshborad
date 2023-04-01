@@ -3,11 +3,13 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import AdminAvatar from "../../Components/AdminAvatar/AdminAvatar";
 import { AuthContext } from "../../Components/Auth/AuthProvider/AuthProvider";
+import useAdmin from "../../CustomHook/useAdmin";
+import useThecher from "../../CustomHook/useThecher";
 import "./SideNav.css";
 
 const SideNav = () => {
    
-  const { logOut } = useContext(AuthContext)
+  const { logOut ,  user} = useContext(AuthContext)
 
   const logOutAdmin = () => {
 
@@ -16,6 +18,15 @@ const SideNav = () => {
     .catch(e => console.error(e))
     
   }
+
+
+ const [isAdmin]=useAdmin(user?.email)
+ const [isThecher]=useThecher(user?.email)
+
+
+ console.log(isThecher)
+
+
 
   return (
 
@@ -27,63 +38,80 @@ const SideNav = () => {
 
         <AdminAvatar/>
 
-        <li className="mt-5 mb-5 text-xl font-bold">
 
-          <Link to="/dashboard" className="hover:text-blue-500">
-            
-            Dashboard
+     {
+      isAdmin &&  <>
+      
+      <li className="mt-5 mb-5 text-xl font-bold">
 
-          </Link>
+<Link to="/dashboard" className="hover:text-blue-500">
+  
+  Dashboard
 
-        </li>
+</Link>
 
-        <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+</li>
 
-          <Link to="/allUser"> All User </Link>
+<li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
 
-        </li>
+<Link to="/allusers">Users</Link>
 
-        <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+</li>
 
-          <Link> Student </Link>
+<li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
 
-        </li>
+<Link> Student </Link>
 
-        <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+</li>
+<li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
 
-          <Link to="/academicCours"> Academy Cours </Link>
+<Link to="/thecher">  Thecher </Link>
 
-        </li>
+</li>
 
-        <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
 
-          <Link> Job Preparation </Link>
+<li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
 
-        </li>
 
-        <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
 
-          <Link> Admission Test </Link>
+</li>
 
-        </li>
+<li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
 
-        <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+<Link> Job Preparation </Link>
 
-          <Link> Book Store </Link>
+</li>
 
-        </li>
+<li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
 
-        <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+<Link> Admission Test </Link>
 
-          <Link> Question Bank </Link>
+</li>
 
-        </li>
+<li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
 
-        <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+<Link> Book Store </Link>
 
-          <Link to="/coursePost/academicours"> Course View </Link>
+</li>
 
-        </li>
+<li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+
+<Link> Question Bank </Link>
+
+</li>
+      
+      </>
+     }
+
+{
+  isThecher  && <Link to="/academicCours"><li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">Cours Post</li> </Link>
+}
+
+
+  
+
+
+       
 
         <button onClick={logOutAdmin} className="bg-red-500 mt-10 px-5 py-1 text-white font-semibold mb-5"> Log Out </button>
         

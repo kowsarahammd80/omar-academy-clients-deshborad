@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { saveuserInfo } from "../../../api/userinfo/userinfo";
+import useToken from "../../../CustomHook/useToken";
 import { AuthContext } from "../../Auth/AuthProvider/AuthProvider";
 import GoogleSignIn from "../../GooleSingIn/GoogleSignIn";
 
@@ -10,10 +12,15 @@ const SignUp = () => {
   const { signUpUser, setProfile } = useContext(AuthContext);
 
   const [imageShow, setImageShow] = useState("");
-
-  console.log(imageShow);
-
   const navigate = useNavigate()
+  const [signUpEmail,setSingupEmail]=useState("")
+  const [token]=useToken(signUpEmail)
+
+
+   if(token){
+    navigate('/')
+   }
+
 
   const handleImageHost = (e) => {
 
@@ -46,31 +53,47 @@ const SignUp = () => {
     const password = form.password.value;
     const name = form.name.value;
 
-    console.log(email, password, name);
+    
+
 
    signUpUser(email,password)
    .then(result => {
      const user = result.user
-     console.log(user)
-     userSet(name, imageShow)
-     navigate('/')
-   })
-   .catch(e => console.error(e))
-  
-  };
-
-  const userSet = (name, imageShow) => {
-
-    const profile = {
+    
+     const profile = {
       displayName: name,
       photoURL: imageShow,
     }
 
     setProfile(profile)
-    .then(() => {})
-    .catch(e => console.error(e))
-     
-  }
+    .then(() => {
+      const information = {
+        name: user.displayName,
+        email: user.email,
+        uid: user.uid,
+        photoURL:imageShow,
+      };
+  
+//get  token
+setSingupEmail(user?.email)
+
+//save data base 
+      saveuserInfo(information)
+  
+    
+
+    })
+
+
+
+
+   
+   })
+   .catch(e => console.error(e))
+  
+  };
+
+ 
 
 
   return (
