@@ -1,17 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import Confirmation from '../../../Sheard/ConfirmationModal/Confirmation'
+import { AuthContext } from '../../Auth/AuthProvider/AuthProvider'
+import { useQuery } from '@tanstack/react-query'
 
 export default function Alladmin() {
-
-    const [alladmins,setAlladmin]=useState([])
-
-    const [deletinguser,setDeletinguser]=useState(null)
+const {user,logOut}=useContext(AuthContext)
+// const [alladmins,setAlladmin]=useState([])
   
+
+
+
+//deleting confarmetion on modal 
+    const [deletinguser,setDeletinguser]=useState(null)
     const closemodal=()=>{
      setDeletinguser(null)
     }
  
+
+    ///delet user
     const  deletUser=user=>{
       fetch(`http://localhost:5000/deletuser/${user?._id}`,{
        method:"DELETE",
@@ -22,6 +29,7 @@ export default function Alladmin() {
       .then(res=>res.json())
       .then(data=>{
       console.log(data)
+      refetch()
       if(data.deletedCount >0){
        toast.success(`${user?.name} Deleted succesfully`)
       
@@ -31,19 +39,60 @@ export default function Alladmin() {
     }
       
 
+ // get all admin 
+
+//  useEffect(() => {
+//   fetch("http://localhost:5000/getalladmin", {
+//     authorization:`bearer ${localStorage.getItem("accessToken")}`
+//   })
+//     .then(res => {
+//       if (res.status === 401 || res.status === 403) {
+//         return logOut();
+//       }
+//       return res.json();
+//     })
+//     .then(data => {
+//       // filter out current user data
+//       const filteredData = data.filter(admin => admin.email !== user?.email);
+//       setAlladmin(filteredData);
+//     })
+// }, [user?.email])
 
 
-useEffect(()=>{
 
-   fetch("http://localhost:5000/getalladmin",{
-    authorization:`bearer ${localStorage.getItem("accessToken")}`
-   })
-   .then(res=>res.json())
-   .then(data=>{
-    setAlladmin(data)
-   })
 
-},[alladmins])
+const { data:alladmins=[], isLoading, isError, error, refetch } = useQuery({
+  queryKey: ["alladmins"],
+  queryFn: async () => {
+    const res = await fetch(`http://localhost:5000/getalladmin`, {
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    });
+    if (!res.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await res.json();
+    return data.filter(admin => admin.email !== user?.email);
+  },
+  onError: (err) => {
+    if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+      logOut();
+    }
+  }
+});
+
+if (isLoading) {
+  return <div>Loading...</div>;
+}
+
+if (isError) {
+  return <div>Error: {error.message}</div>;
+}
+
+
+
+
 
   
     return (

@@ -6,9 +6,9 @@ const AdminAvatar = () => {
   const {user} = useContext(AuthContext)
 const[curentuser,setCurentuser]=useState({})
  
-
-
- useEffect(()=>{
+ 
+///get  login user or  theacher   or admin  
+useEffect(()=>{
  fetch(`http://localhost:5000/userinfo?email=${user?.email}`,{
   method:"GET",
   headers:{
@@ -19,10 +19,7 @@ const[curentuser,setCurentuser]=useState({})
  .then(data=>{
   setCurentuser(data)
  })
-  
-
  },[user.email])
-
 
 
   return (
@@ -33,10 +30,15 @@ const[curentuser,setCurentuser]=useState({})
 
             <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
 
-              <img
-                src={curentuser?.photoURL}
-                alt="admin"
-              />
+             {
+              curentuser.photoURL?  <img
+              src={curentuser?.photoURL}
+              alt="profile"
+            />: <img
+            src="https://i.ibb.co/wSJpnqQ/download.png"
+            alt="admin"
+          />
+             }
 
             </div>
 

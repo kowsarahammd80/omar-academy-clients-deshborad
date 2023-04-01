@@ -46,8 +46,8 @@ const number=from.number.value
    }
 
 
-    fetch("http://localhost:5000/addThecher",{
-        method: 'POST',
+    fetch(`http://localhost:5000/addThecher/${info.email}`,{
+        method: 'PUT',
         headers: {
             authorization:`bearer ${localStorage.getItem("accessToken")} `,
           'Content-Type': 'application/json'
