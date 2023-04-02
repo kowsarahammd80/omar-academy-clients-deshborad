@@ -9,11 +9,12 @@ import GoogleSignIn from "../../GooleSingIn/GoogleSignIn";
 
 const SignUp = () => {
 
-  const { signUpUser, setProfile } = useContext(AuthContext);
+  const { signUpUser, setProfile, emailVerification } = useContext(AuthContext);
 
   const [imageShow, setImageShow] = useState("");
   const navigate = useNavigate()
   const [signUpEmail,setSingupEmail]=useState("")
+  const [error, setError] = useState("")
   const [token]=useToken(signUpEmail)
 
 
@@ -59,7 +60,11 @@ const SignUp = () => {
    signUpUser(email,password)
    .then(result => {
      const user = result.user
-    
+
+    //  email verification
+     emailVerification().then(() => {
+      alert("Please check your email address for email verification")
+    })
      const profile = {
       displayName: name,
       photoURL: imageShow,
@@ -89,7 +94,10 @@ setSingupEmail(user?.email)
 
    
    })
-   .catch(e => console.error(e))
+   .catch(e => {
+    console.error(e)
+    setError(e.message)
+  })
   
   };
 
@@ -180,6 +188,12 @@ setSingupEmail(user?.email)
                       <Link to="/" className="text-center text-blue-500"> Sign In Now </Link>
 
                 </div>
+
+                <p className="font-semibold text-red-500 my-5">
+
+                  {error}
+
+                </p>
 
                  <button
                   type="submit"
