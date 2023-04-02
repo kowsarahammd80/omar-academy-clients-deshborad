@@ -18,7 +18,7 @@ const CoursCard = ({ cours }) => {
       <div className="card-body">
         <h2 className="text-xl "> Cours: {courseName}</h2>
         <div className="card-actions justify-center">
-          <Link to={`/academicCours/coursdettails/${_id}`}>
+          <Link to={`/thecherdashbord/coursdettails/${_id}`}>
             <button className="academy-see-details-button">See Details</button>
           </Link>{" "}
         </div>

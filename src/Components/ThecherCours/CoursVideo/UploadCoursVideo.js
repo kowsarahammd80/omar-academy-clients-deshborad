@@ -17,11 +17,18 @@ const UploadCoursVideo = ({ coursdettails, refetch }) => {
   const handleUploadProgress = (event) => {
     const percentCompleted = Math.round((event.loaded * 100) / event.total);
     setUploadProgress(percentCompleted);
+  
+    if (percentCompleted === 100) {
+      const modalCheckbox = document.getElementById("my-modal");
+      modalCheckbox.checked = false;
+      refetch()
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const from = e.target;
+    
 
     const formData = new FormData();
 
@@ -40,24 +47,19 @@ const UploadCoursVideo = ({ coursdettails, refetch }) => {
         onUploadProgress: handleUploadProgress,
       })
       .then((response) => {
-        console.log(response.data);
-        refetch();
-        from.reset();
+
+        console.log(response.data)
+        from.reset()
 
         // handle success
+      
+           
       })
       .catch((error) => {
         console.log(error);
         // handle error
       });
   };
-
-
-
-
-
-
-
   return (
     <>
       <input type="checkbox" id="my-modal" className="modal-toggle" />
@@ -65,21 +67,23 @@ const UploadCoursVideo = ({ coursdettails, refetch }) => {
         <div className="modal-box">
           <div className="modal-action">
             <form onSubmit={handleSubmit}>
-              <div className="flex">
-                <label htmlFor="courseName">Chapter Name:</label>
+              <div className="">
+                <label htmlFor="courseName">Chapter Name: </label>
                 <input
                   type="text"
                   id="chapterName"
                   name="chapterName"
                   placeholder="capter name "
                   value={chapterName}
+                  required
                   className="input input-bordered input-info mb-4 w-full max-w-xs"
                   onChange={handlechapterNameChange}
                 />
               </div>
-              <div className="flex">
-                <label htmlFor="videos">Videos:</label>
+              <div className="">
+          
                 <input
+                required
                   className="input mb-4  input-info w-full max-w-xs"
                   type="file"
                   id="videos"
@@ -88,6 +92,8 @@ const UploadCoursVideo = ({ coursdettails, refetch }) => {
                   onChange={handleVideoChange}
                 />
               </div>
+
+
               <div className="progress">
                 <div
                   className="progress-bar"

@@ -9,13 +9,13 @@ const PlayerList = ({ selectedVideo, chapter, handleVideoClick }) => {
   };
 
   return (
-    <div>
+    <div  className="overflow-y-scroll h[500px]">  
       <div
         className="flex justify-between items-center bg-gray-200 p-4 cursor-pointer"
         onClick={handleClick}
       >
         <h2 className="font-bold capitalize ">
-          Chapter name: <span className="text-xl">{chapterName}</span>
+          Chapter name: <span className="text-md">{chapterName}</span>
         </h2>
         <span>{isOpen ? "-" : "+"}</span>
       </div>
@@ -24,7 +24,7 @@ const PlayerList = ({ selectedVideo, chapter, handleVideoClick }) => {
           {videos?.map((video, i) => (
             <p
               key={video._id}
-              className={`cursor-pointer  capitalize  text-lg font-semibold ${
+              className={`cursor-pointer  capitalize  text-sm  font-semibold ${
                 selectedVideo === video ? "text-blue-400 active" : "text-black"
               }`}
               onClick={() => handleVideoClick(video)}

@@ -16,7 +16,7 @@ const CoursDettails = () => {
   };
 
   ///get cours video
-  const { data: videos = [], refetch } = useQuery({
+  const { data: videos = [],refetch} = useQuery({
     queryKey: ["videos"],
     queryFn: async () => {
       const res = await fetch(
@@ -29,47 +29,52 @@ const CoursDettails = () => {
 
   return (
     <>
-      {" "}
-      <div
-        className="py-20 bg-no-repeat bg-cover "
-        style={{ backgroundImage: `url(${coursdettails?.coursThumnil})` }}
-      >
-        <div className="hero-content text-center text-neutral-content">
-          <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">
-              {coursdettails?.courseName}
-            </h1>
-            <p className="mb-5"> {coursdettails?.aboutCours}</p>
-            <button className="btn btn-primary mr-4">Manage-Cours</button>
+<div > 
+<div>
+<img 
+className="flex justify-center items-center"
+  src={coursdettails?.coursThumnil}
+  class="h-auto max-w-full m-auto"
+  alt="..." />
+</div>
 
-            <label htmlFor="my-modal" className="btn">
+  <div className="flex justify-center items-center mt-3">
+    <h2 className="mr-3 text-lg capitalize">courseName:{coursdettails?.courseName} </h2>
+    <label htmlFor="my-modal" className="btn">
               Upload-Video
             </label>
-          </div>
-        </div>
+  </div>
 
-        <div>
+  <div>
           <UploadCoursVideo
             coursdettails={coursdettails}
             refetch={refetch}
           ></UploadCoursVideo>
-        </div>
-      </div>
+        
+      </div> 
+</div>
+
+     
+
       <div className="flex flex justify-between  flex-col lg:flex-row  xl:flex-row items-center my-20">
         <div className="xl:w-1/2 lg:w-1/2 w-full  h-[500px] ">
           {selectedVideo && <Player selectedVideo={selectedVideo}></Player>}
         </div>
 
-        <div className="xl:w-1/2 lg:w-1/2 w-full  mx-2  h-[500px] overflow-y-scroll ">
-          {videos?.map((video, index) => (
-            <PlayerList
-              chapter={video}
-              index={index}
-              handleVideoClick={handleVideoClick}
-              key={video._id}
-              selectedVideo={selectedVideo}
-            ></PlayerList>
-          ))}
+        <div className="xl:w-1/2 lg:w-1/2 w-full  mx-2  h-[500px]  ">
+        <h1 className="text-xl capitalize font-bold">Cours Video</h1>
+    
+         {videos?.map((video, index) => (
+        <PlayerList
+          chapter={video}
+          index={index}
+          handleVideoClick={handleVideoClick}
+          key={video._id}
+          selectedVideo={selectedVideo}
+        ></PlayerList>
+      ))}
+    
+
         </div>
       </div>
     </>

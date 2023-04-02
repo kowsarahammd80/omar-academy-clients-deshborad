@@ -46,9 +46,13 @@ useEffect(()=>{
 
           <div className="mt-5 mb-10 ml-5">
 
-            <p className="text-md font-semibold ">{curentuser.name}</p>
+            <p className="text-md font-semibold ">Name: {curentuser.name}</p>
+
+         { 
+             curentuser?.phonNumber &&    <p className="text-md font-semibold ">Mobile: {curentuser.phonNumber}</p>
+         }
             
-            <p className="text-sm font-semibold ">{curentuser?.email}</p>
+            <p className="text-sm font-semibold ">Email: {curentuser?.email}</p>
             {
               curentuser?.role && <p className="text-sm font-semibold "> Role: {curentuser?.role}</p>
             }
