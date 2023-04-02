@@ -104,7 +104,7 @@ const SideNav = () => {
      }
 
 {
-  isThecher  && <Link to="/academicCours"><li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">Cours Post</li> </Link>
+  isThecher  && <Link to="/thecherdashbord"><li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">Cours Post</li> </Link>
 }
 
 

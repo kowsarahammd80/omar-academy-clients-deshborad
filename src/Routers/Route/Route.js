@@ -1,12 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import AcademiDashbord from "../../Components/AcademyCours/AcademeyDashbord/AcademiDashbord";
-import CoursePost from "../../Components/AcademyCours/CoursePost";
-import CoursDettails from "../../Components/AcademyCours/Show-cours/CoursCard/CoursDettails";
-import Getacademycours from "../../Components/AcademyCours/Show-cours/Getacademycours";
 import AddThecher from "../../Components/AddThecher/AddThecher";
 import DisplayThecher from "../../Components/AddThecher/DisplayThecher";
 import Alladmin from "../../Components/AdminAvatar/GetallAdmin/Alladmin";
-import Dashboard from "../../Components/Dashboard/Dashboard";
 import Sign from "../../Components/User/Sign/Sign";
 import SignUp from "../../Components/User/SignUp/SignUp";
 import Users from "../../Components/Users/Users";
@@ -15,6 +10,10 @@ import Wellcome from "../../Components/Wellcome/Wellcome";
 import Main from "../../Layout/Main/Main";
 import AdminRoute from "../PrivateRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import GetThecherCors from "../../Components/ThecherCours/Show-cours/GetThecherCors";
+import ThecherCoursDashbord from "../../Components/ThecherCours/TheacherCorsDashbord/ThecherCoursDashbord";
+import CoursePost from "../../Components/ThecherCours/CoursePost";
+import CoursDettails from "../../Components/ThecherCours/Show-cours/CoursCard/CoursDettails";
 
 const routers = createBrowserRouter([
 
@@ -67,21 +66,21 @@ const routers = createBrowserRouter([
       ,
 
       {
-        path: "/academicCours",
-        element: <PrivateRoute><AcademiDashbord></AcademiDashbord></PrivateRoute>,
+        path: "/thecherdashbord",
+        element: <PrivateRoute><ThecherCoursDashbord></ThecherCoursDashbord></PrivateRoute>,
         children: [
           {
-            path: "/academicCours",
+            path: "/thecherdashbord",
             element: <CoursePost></CoursePost>,
           },
           {
-            path: "/academicCours/getacademicCourse",
-            element: <Getacademycours></Getacademycours>,
+            path: "/thecherdashbord/showTheacherCours",
+            element:<GetThecherCors></GetThecherCors> ,
           },
           {
-            path: "/academicCours/coursdettails/:id",
+            path: "/thecherdashbord/coursdettails/:id",
             loader: async ({ params }) =>
-              fetch(`http://localhost:5000/academic/${params.id}`),
+              fetch(`http://localhost:5000/cours/${params.id}`),
             element: <CoursDettails></CoursDettails>,
           },
         ],

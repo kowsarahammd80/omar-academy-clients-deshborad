@@ -39,24 +39,7 @@ const {user,logOut}=useContext(AuthContext)
     }
       
 
- // get all admin 
 
-//  useEffect(() => {
-//   fetch("http://localhost:5000/getalladmin", {
-//     authorization:`bearer ${localStorage.getItem("accessToken")}`
-//   })
-//     .then(res => {
-//       if (res.status === 401 || res.status === 403) {
-//         return logOut();
-//       }
-//       return res.json();
-//     })
-//     .then(data => {
-//       // filter out current user data
-//       const filteredData = data.filter(admin => admin.email !== user?.email);
-//       setAlladmin(filteredData);
-//     })
-// }, [user?.email])
 
 
 

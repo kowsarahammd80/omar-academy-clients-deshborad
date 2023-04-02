@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CoursCard from "./CoursCard/CoursCard";
+import { AuthContext } from "../../Auth/AuthProvider/AuthProvider";
 
-const Getacademycours = () => {
+const GetThecherCors = () => {
   const [Course, setAllcourses] = useState([]);
+  const {user}=useContext(AuthContext)
 
   useEffect(() => {
-    fetch("http://localhost:5000/getacadmic")
+    fetch(`http://localhost:5000/getTheacherCours?email=${user?.email}`)
       .then((res) => res.json())
       .then((Data) => {
         setAllcourses(Data);
-
         console.log(Data);
       });
   }, []);
@@ -40,4 +41,4 @@ const Getacademycours = () => {
   );
 };
 
-export default Getacademycours;
+export default GetThecherCors;

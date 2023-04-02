@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
  function AddThecher() {
 
  const [img,setImage]=useState("")
+ 
+ const navigate=useNavigate()
  
 
     const handleImageHost = (e) => {
@@ -59,6 +62,7 @@ const number=from.number.value
         console.log(data)
         from.reset()
         setImage("")
+        navigate("/allusers/thecher")
         toast.success("thecher add succesfully")
     })
     }

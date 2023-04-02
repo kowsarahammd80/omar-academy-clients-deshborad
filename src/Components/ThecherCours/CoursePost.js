@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import "./CoursePost.css";
+import { AuthContext } from "../Auth/AuthProvider/AuthProvider";
 
 const CoursePost = () => {
+   
+  const {user}=useContext(AuthContext)
+  
+  
   const [chapters, setChapters] = useState([{ name: "", details: "" }]);
+
 
 
   const navigate=useNavigate()
@@ -84,6 +90,17 @@ const CoursePost = () => {
     setKeypoint(newkeyPoint);
   };
 
+  //type of cours
+
+  const [coursType, setCoursType] = useState('');
+
+  const handleSelectChange = (event) => {
+    setCoursType(event.target.value);
+  }
+
+
+ 
+
   const handleCourse = (event) => {
     event.preventDefault();
 
@@ -98,7 +115,9 @@ const CoursePost = () => {
 
     const cours = {
       courseName,
+       owner: user?.email,
       coursThumnil: coursimg,
+      coursType:coursType,
       coursPrice,
       ThecherName,
       videolecture: chapters,
@@ -112,7 +131,7 @@ const CoursePost = () => {
     };
 
 
-    fetch("http://localhost:5000/academic", {
+    fetch("http://localhost:5000/savecours", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -124,7 +143,7 @@ const CoursePost = () => {
         console.log(data);
         from.reset()
         toast.success("cours post succesfully",{autoClose:50000})
-        navigate("/academicCours/getacademicCourse")
+        navigate("/thecherdashbord/thecherdashbord")
       });
   };
 
@@ -134,7 +153,7 @@ const CoursePost = () => {
 
       <div className="text-center mt-10">
         <h1 className="text-2xl lg:text-4xl font-semibold">
-          Accademic Cours Post
+            Cours Post
         </h1>
       </div>
 
@@ -162,6 +181,18 @@ const CoursePost = () => {
                       className="input input-bordered w-full"
                     />
                   </div>
+                  <div>
+                
+     <p  className="font-semibold pb-2 capitalize text-md"> <label htmlFor="selectOption">Cours Type</label></p>
+      <select required className="p-3 select select-bordered w-full max-w-xs" id="selectOption" onChange={handleSelectChange}>
+        <option  className="select select-bordered w-full max-w-xs" value="" selected>please select your cours tupe </option>
+        <option className="select select-bordered w-full max-w-xs" value="Academic">Academic</option>
+        <option className="select select-bordered w-full max-w-xs" value="universityAdmission">University-Test</option>
+        <option className="select select-bordered w-full max-w-xs" value="jobpreParetion">Jobs-Preparession</option>
+
+      </select>
+     
+    </div>
 
                   <div>
                     <p className="font-semibold mb-2">Course Image</p>
