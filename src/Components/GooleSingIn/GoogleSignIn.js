@@ -49,7 +49,7 @@ const GoogleSignIn = () => {
  
   return (
 
-    <div>
+    <div className='w-full mx-0 lg:px-28 xl:px-28'>
         
          <button onClick={handleGoogleLogin} className='my-5 googleSignInButton'> Sign In With Google
          </button>
