@@ -104,16 +104,16 @@ const SideNav = () => {
      }
 
 {
-  isThecher  && <Link to="/thecherdashbord"><li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">Cours Post</li> </Link>
+  isThecher  &&
+  <>
+  <Link to="/thecherdashbord"><li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">Courses</li> </Link>
+  <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+<Link to="/theacherBookDashbord"> Books</Link>
+</li></>
 }
 
 
-  
-
-
-       
-
-        <button onClick={logOutAdmin} className="bg-red-500 mt-10 px-5 py-1 text-white font-semibold mb-5"> Log Out </button>
+<button onClick={logOutAdmin} className="bg-red-500 mt-10 px-5 py-1 text-white font-semibold mb-5"> Log Out </button>
         
       </ul>
 

@@ -143,7 +143,7 @@ const CoursePost = () => {
         console.log(data);
         from.reset()
         toast.success("cours post succesfully",{autoClose:50000})
-        navigate("/thecherdashbord/thecherdashbord")
+        navigate("/thecherdashbord/showTheacherCours")
       });
   };
 

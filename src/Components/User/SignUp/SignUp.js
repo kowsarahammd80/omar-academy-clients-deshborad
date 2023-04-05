@@ -204,11 +204,15 @@ setSingupEmail(user?.email)
 
                  </button>
 
-                  <GoogleSignIn/>
+             
 
               </div>
 
             </form>
+
+            <div>
+            <GoogleSignIn/>
+            </div>
 
           </div>
 

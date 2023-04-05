@@ -168,7 +168,7 @@ const Sign = () => {
                   Sign In
                 </button>
 
-                <GoogleSignIn />
+             
 
                 <p
                     onClick={forgetPasswordHandle}
@@ -181,6 +181,8 @@ const Sign = () => {
 
 
             </form>
+
+            <div>   <GoogleSignIn /></div>
 
           </div>
 

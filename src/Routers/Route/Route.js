@@ -14,6 +14,9 @@ import GetThecherCors from "../../Components/ThecherCours/Show-cours/GetThecherC
 import ThecherCoursDashbord from "../../Components/ThecherCours/TheacherCorsDashbord/ThecherCoursDashbord";
 import CoursePost from "../../Components/ThecherCours/CoursePost";
 import CoursDettails from "../../Components/ThecherCours/Show-cours/CoursCard/CoursDettails";
+import BookDhashbord from "../../Components/ThecherCours/ThechersBooks/BookPost/BookDashbord/BookDhashbord";
+import BookPost from "../../Components/ThecherCours/ThechersBooks/BookPost/BookPost";
+import Showbooks from "../../Components/ThecherCours/ThechersBooks/BookPost/BookDashbord/ShowBook/Showbooks";
 
 const routers = createBrowserRouter([
 
@@ -85,9 +88,20 @@ const routers = createBrowserRouter([
           },
         ],
       },
-      
-     
-      
+      {
+        path:"/theacherBookDashbord",
+        element:<BookDhashbord></BookDhashbord>,
+        children:[
+          {
+            path:"/theacherBookDashbord",
+            element:<BookPost></BookPost>
+          },
+          {
+            path:"/theacherBookDashbord/books",
+            element:<Showbooks></Showbooks>
+          }
+        ]
+      }
     ],
   },
 ]);
