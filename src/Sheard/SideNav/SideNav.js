@@ -78,7 +78,7 @@ const SideNav = () => {
 
 <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
 
-<Link> Job Preparation </Link>
+<Link > Job Preparation </Link>
 
 </li>
 
