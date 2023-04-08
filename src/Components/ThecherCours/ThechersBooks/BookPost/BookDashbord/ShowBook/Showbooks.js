@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../../../../Auth/AuthProvider/AuthProvider'
-import Book from './Book'
+import Sbook from './Sbook'
+
+
 
  function Showbooks() {
 
@@ -17,13 +19,12 @@ import Book from './Book'
 
    },[user?.email]) 
 
-    
-    console.log(books)
+ 
 
 
   return (
     <div>
-        <h1>All books</h1>
+        <h1  className='text-center capitalize text-2xl mb-4 font-bold'>All books</h1>
 <form>   
     <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
     <div class="relative">
@@ -35,6 +36,20 @@ import Book from './Book'
     </div>
 </form>
  
+
+
+
+
+ <div className='grid grid-cols-1 xl:grid-cols-3 my-8 lg:grid-cols-3 md:grid-cols-2  gap-8'>
+ {
+    books?.map(book=><Sbook book={book} key={book._id}></Sbook>)
+  }
+ </div>
+
+
+
+
+
     
     </div>
   )
