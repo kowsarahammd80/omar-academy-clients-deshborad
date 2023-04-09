@@ -7,10 +7,8 @@ import { useNavigate } from 'react-router-dom';
  const [img,setImage]=useState("")
  
  const navigate=useNavigate()
- 
 
     const handleImageHost = (e) => {
-
         const img = e.target.files[0];
         const formData = new FormData();
         formData.append("image", img);
@@ -62,12 +60,12 @@ const number=from.number.value
         console.log(data)
         from.reset()
         setImage("")
-        navigate("/allusers/thecher")
-        toast.success("thecher add succesfully")
+        navigate("/thecher")
+        toast.success("teacher add sucessfully")
     })
     }
 
-
+ 
 
 
  

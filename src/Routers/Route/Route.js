@@ -17,21 +17,20 @@ import CoursDettails from "../../Components/ThecherCours/Show-cours/CoursCard/Co
 import BookDhashbord from "../../Components/ThecherCours/ThechersBooks/BookPost/BookDashbord/BookDhashbord";
 import BookPost from "../../Components/ThecherCours/ThechersBooks/BookPost/BookPost";
 import Showbooks from "../../Components/ThecherCours/ThechersBooks/BookPost/BookDashbord/ShowBook/Showbooks";
+import ThecherLayot from "../../Components/AddThecher/ThecherLayot/ThecherLayot";
+import QuestionbankDashbord from "../../Components/QuestionBanck/QuestionbankDashbord";
+import AllQuestion from "../../Components/QuestionBanck/AllQuestion/AllQuestion";
+import Addquestion from "../../Components/QuestionBanck/AddQuestion/Addquestion";
 
 const routers = createBrowserRouter([
-
   {
     path: "/",
     element: <Sign/>
   },
-
   {
     path: "/signUp",
     element: <SignUp/>
   },
-
-  
-
   {
     path: "/",
     element: <PrivateRoute><Main></Main></PrivateRoute>,
@@ -42,8 +41,18 @@ const routers = createBrowserRouter([
         element: <PrivateRoute><Wellcome></Wellcome></PrivateRoute>,
       },
     { 
-            path:"/thecher",
-            element:<AddThecher></AddThecher>
+          path:"/thecher",
+            element:<ThecherLayot></ThecherLayot>,
+            children:[
+              {
+                path:"/thecher",
+                element:<DisplayThecher></DisplayThecher>
+              },
+              {
+                path:"/thecher/addTeacher",
+                element:<AddThecher></AddThecher>
+              }
+            ]
           },
      {
       path:"/allusers",
@@ -60,12 +69,8 @@ const routers = createBrowserRouter([
         path:"/allusers/admin",
         element:<Alladmin></Alladmin>
       }
-      
-    
-    
     ]
      }
-        
       ,
 
       {
@@ -74,11 +79,11 @@ const routers = createBrowserRouter([
         children: [
           {
             path: "/thecherdashbord",
-            element: <CoursePost></CoursePost>,
+            element:<GetThecherCors></GetThecherCors> ,
           },
           {
-            path: "/thecherdashbord/showTheacherCours",
-            element:<GetThecherCors></GetThecherCors> ,
+            path: "/thecherdashbord/postcours",
+            element:<CoursePost></CoursePost> ,
           },
           {
             path: "/thecherdashbord/coursdettails/:id",
@@ -94,16 +99,31 @@ const routers = createBrowserRouter([
         children:[
           {
             path:"/theacherBookDashbord",
-            element:<BookPost></BookPost>
+            element:<Showbooks></Showbooks> ,
           },
           {
-            path:"/theacherBookDashbord/books",
-            element:<Showbooks></Showbooks>
+            path:"/theacherBookDashbord/bookpost",
+            element: <BookPost></BookPost>
+          }
+        ]
+      },
+      {
+        path:"/teacherQuestionbank",
+        element:<QuestionbankDashbord></QuestionbankDashbord>,
+        children:[
+          {
+            path:"/teacherQuestionbank",
+            element:<AllQuestion></AllQuestion>
+          },
+          {
+            path:"/teacherQuestionbank/addQuestion",
+            element:<Addquestion></Addquestion>
           }
         ]
       }
     ],
   },
+  
 ]);
 
 export default routers;
