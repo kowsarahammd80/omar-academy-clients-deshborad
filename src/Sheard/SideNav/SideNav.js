@@ -107,9 +107,14 @@ const SideNav = () => {
   isThecher  &&
   <>
   <Link to="/thecherdashbord"><li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">Courses</li> </Link>
-  <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
-<Link to="/theacherBookDashbord"> Books</Link>
-</li></>
+  <Link to="/theacherBookDashbord">  <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+Books
+</li></Link>
+  <Link to="/teacherQuestionbank">  <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+Question-Bank
+</li></Link>
+
+</>
 }
 
 
