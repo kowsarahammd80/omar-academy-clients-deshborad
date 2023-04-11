@@ -64,10 +64,11 @@ const SideNav = () => {
                 Book Store
               </li>
             </Link>
-
-            <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
-              <Link> Question Bank </Link>
-            </li>
+            <Link to="/adminDashbord/questionbank">
+              <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+                Question Bank
+              </li>
+            </Link>
           </>
         )}
 

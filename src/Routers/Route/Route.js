@@ -26,6 +26,7 @@ import AdminLayot from "../../AdminDashbord/AdminLayot/AdminLayot";
 import Allcours from "../../AdminDashbord/AllCours/Allcours";
 import Dettaills from "../../AdminDashbord/AllCours/CoursDettaills/Dettaills";
 import Books from "../../AdminDashbord/Allbooks/Books";
+import Questionbank from "../../AdminDashbord/QuestionBank/Questionbank";
 
 const routers = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ const routers = createBrowserRouter([
           {
             path: "/adminDashbord/books",
             element: <Books></Books>
+          },
+          {
+            path: "/adminDashbord/questionbank",
+            element: <Questionbank></Questionbank>
           }
         ]
       },
