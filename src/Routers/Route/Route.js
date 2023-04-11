@@ -21,109 +21,157 @@ import ThecherLayot from "../../Components/AddThecher/ThecherLayot/ThecherLayot"
 import QuestionbankDashbord from "../../Components/QuestionBanck/QuestionbankDashbord";
 import AllQuestion from "../../Components/QuestionBanck/AllQuestion/AllQuestion";
 import Addquestion from "../../Components/QuestionBanck/AddQuestion/Addquestion";
+import AdminDashbord from "../../AdminDashbord/AdminDashbord/AdminDashbord";
+import AdminLayot from "../../AdminDashbord/AdminLayot/AdminLayot";
+import Allcours from "../../AdminDashbord/AllCours/Allcours";
+import Dettaills from "../../AdminDashbord/AllCours/CoursDettaills/Dettaills";
+import Books from "../../AdminDashbord/Allbooks/Books";
+import Questionbank from "../../AdminDashbord/QuestionBank/Questionbank";
 
 const routers = createBrowserRouter([
   {
     path: "/",
-    element: <Sign/>
+    element: <Sign />
   },
   {
     path: "/signUp",
-    element: <SignUp/>
+    element: <SignUp />
   },
   {
     path: "/",
-    element: <PrivateRoute><Main></Main></PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <Main></Main>
+      </PrivateRoute>
+    ),
     children: [
-  
       {
         path: "/dashboard",
-        element: <PrivateRoute><Wellcome></Wellcome></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <Wellcome></Wellcome>
+          </PrivateRoute>
+        )
       },
-    { 
-          path:"/thecher",
-            element:<ThecherLayot></ThecherLayot>,
-            children:[
-              {
-                path:"/thecher",
-                element:<DisplayThecher></DisplayThecher>
-              },
-              {
-                path:"/thecher/addTeacher",
-                element:<AddThecher></AddThecher>
-              }
-            ]
+      {
+        path: "/adminDashbord",
+        element: <AdminLayot />,
+        children: [
+          {
+            path: "/adminDashbord",
+            element: <AdminDashbord></AdminDashbord>
           },
-     {
-      path:"/allusers",
-      element:<UserLayot></UserLayot>,
-      children:[{
-        path: "/allusers",
-        element:<AdminRoute><Users/></AdminRoute>
+          {
+            path: "/adminDashbord/course",
+            element: <Allcours></Allcours>
+          },
+          {
+            path: "/adminDashbord/course/coursdettails/:id",
+            loader: async ({ params }) =>
+              fetch(`http://localhost:5000/cours/${params.id}`),
+            element: <Dettaills></Dettaills>
+          },
+          {
+            path: "/adminDashbord/books",
+            element: <Books></Books>
+          },
+          {
+            path: "/adminDashbord/questionbank",
+            element: <Questionbank></Questionbank>
+          }
+        ]
       },
-      {
-        path:"/allusers/thecher",
-        element:<DisplayThecher></DisplayThecher>
-      },
-      {
-        path:"/allusers/admin",
-        element:<Alladmin></Alladmin>
-      }
-    ]
-     }
-      ,
 
       {
+        path: "/thecher",
+        element: <ThecherLayot></ThecherLayot>,
+        children: [
+          {
+            path: "/thecher",
+            element: <DisplayThecher></DisplayThecher>
+          },
+          {
+            path: "/thecher/addTeacher",
+            element: <AddThecher></AddThecher>
+          }
+        ]
+      },
+      {
+        path: "/allusers",
+        element: <UserLayot></UserLayot>,
+        children: [
+          {
+            path: "/allusers",
+            element: (
+              <AdminRoute>
+                <Users />
+              </AdminRoute>
+            )
+          },
+          {
+            path: "/allusers/thecher",
+            element: <DisplayThecher></DisplayThecher>
+          },
+          {
+            path: "/allusers/admin",
+            element: <Alladmin></Alladmin>
+          }
+        ]
+      },
+      {
         path: "/thecherdashbord",
-        element: <PrivateRoute><ThecherCoursDashbord></ThecherCoursDashbord></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <ThecherCoursDashbord></ThecherCoursDashbord>
+          </PrivateRoute>
+        ),
         children: [
           {
             path: "/thecherdashbord",
-            element:<GetThecherCors></GetThecherCors> ,
+            element: <GetThecherCors></GetThecherCors>
           },
           {
             path: "/thecherdashbord/postcours",
-            element:<CoursePost></CoursePost> ,
+            element: <CoursePost></CoursePost>
           },
           {
             path: "/thecherdashbord/coursdettails/:id",
             loader: async ({ params }) =>
               fetch(`http://localhost:5000/cours/${params.id}`),
-            element: <CoursDettails></CoursDettails>,
-          },
-        ],
+            element: <CoursDettails></CoursDettails>
+          }
+        ]
       },
       {
-        path:"/theacherBookDashbord",
-        element:<BookDhashbord></BookDhashbord>,
-        children:[
+        path: "/theacherBookDashbord",
+        element: <BookDhashbord></BookDhashbord>,
+        children: [
           {
-            path:"/theacherBookDashbord",
-            element:<Showbooks></Showbooks> ,
+            path: "/theacherBookDashbord",
+            element: <Showbooks></Showbooks>
           },
           {
-            path:"/theacherBookDashbord/bookpost",
+            path: "/theacherBookDashbord/bookpost",
             element: <BookPost></BookPost>
           }
         ]
       },
       {
-        path:"/teacherQuestionbank",
-        element:<QuestionbankDashbord></QuestionbankDashbord>,
-        children:[
+        path: "/teacherQuestionbank",
+        element: <QuestionbankDashbord></QuestionbankDashbord>,
+        children: [
           {
-            path:"/teacherQuestionbank",
-            element:<AllQuestion></AllQuestion>
+            path: "/teacherQuestionbank",
+            element: <AllQuestion></AllQuestion>
           },
           {
-            path:"/teacherQuestionbank/addQuestion",
-            element:<Addquestion></Addquestion>
+            path: "/teacherQuestionbank/addQuestion",
+            element: <Addquestion></Addquestion>
           }
         ]
       }
-    ],
-  },
-  
+    ]
+  }
 ]);
 
 export default routers;

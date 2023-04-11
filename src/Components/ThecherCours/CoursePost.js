@@ -5,22 +5,18 @@ import "./CoursePost.css";
 import { AuthContext } from "../Auth/AuthProvider/AuthProvider";
 
 const CoursePost = () => {
-   
-  const {user}=useContext(AuthContext)
-  
-  
+  const { user } = useContext(AuthContext);
+
   const [chapters, setChapters] = useState([{ name: "", details: "" }]);
 
-
-
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   //heandleImage
 
   const [coursimg, setCoursImg] = useState();
   const [thecherimg, setTexherImg] = useState();
 
   ///course img
-  const handleCourseImg = (e) => {
+  const handleCourseImg = e => {
     const img = e.target.files[0];
     const formData = new FormData();
     formData.append("image", img);
@@ -29,18 +25,18 @@ const CoursePost = () => {
 
     fetch(url, {
       method: "POST",
-      body: formData,
+      body: formData
     })
-      .then((res) => res.json())
-      .then((imgData) => {
+      .then(res => res.json())
+      .then(imgData => {
         const img = imgData.data.url;
         setCoursImg(img);
       })
-      .catch((e) => {
+      .catch(e => {
         alert("internet  problem");
       });
   };
-  const handleThecherImg = (e) => {
+  const handleThecherImg = e => {
     const img = e.target.files[0];
     const formData = new FormData();
     formData.append("image", img);
@@ -49,14 +45,14 @@ const CoursePost = () => {
 
     fetch(url, {
       method: "POST",
-      body: formData,
+      body: formData
     })
-      .then((res) => res.json())
-      .then((imgData) => {
+      .then(res => res.json())
+      .then(imgData => {
         const img = imgData.data.url;
         setTexherImg(img);
       })
-      .catch((e) => {
+      .catch(e => {
         alert("internet  problem");
       });
   };
@@ -92,21 +88,18 @@ const CoursePost = () => {
 
   //type of cours
 
-  const [coursType, setCoursType] = useState('');
+  const [coursType, setCoursType] = useState("");
 
-  const handleSelectChange = (event) => {
+  const handleSelectChange = event => {
     setCoursType(event.target.value);
-  }
+  };
 
-
- 
-
-  const handleCourse = (event) => {
+  const handleCourse = event => {
     event.preventDefault();
 
     const from = event.target;
     const courseName = from.courseName.value;
-    const coursPrice=from.price.value
+    const coursPrice = from.price.value;
     const ThecherEducation = from.ThecherEducation.value;
     const aboutCours = from.aboutCours.value;
     const ThecherName = from.ThecherName.value;
@@ -115,9 +108,11 @@ const CoursePost = () => {
 
     const cours = {
       courseName,
-       owner: user?.email,
+      ownerName: user?.displayName,
+      owerimg: user?.photoURL,
+      owner: user?.email,
       coursThumnil: coursimg,
-      coursType:coursType,
+      coursType: coursType,
       coursPrice,
       ThecherName,
       videolecture: chapters,
@@ -127,23 +122,22 @@ const CoursePost = () => {
       ThecherEducation,
       aboutCours,
       videoQuantity,
-      chapterQuantity,
+      chapterQuantity
     };
-
 
     fetch("http://localhost:5000/savecours", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(cours),
+      body: JSON.stringify(cours)
     })
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         console.log(data);
-        from.reset()
-        toast.success("cours post succesfully",{autoClose:50000})
-        navigate("/thecherdashbord/showTheacherCours")
+        from.reset();
+        toast.success("cours post succesfully", { autoClose: 50000 });
+        navigate("/thecherdashbord/showTheacherCours");
       });
   };
 
@@ -152,9 +146,7 @@ const CoursePost = () => {
       {/* headline */}
 
       <div className="text-center mt-10">
-        <h1 className="text-2xl lg:text-4xl font-semibold">
-            Cours Post
-        </h1>
+        <h1 className="text-2xl lg:text-4xl font-semibold">Cours Post</h1>
       </div>
 
       {/* post input */}
@@ -182,17 +174,43 @@ const CoursePost = () => {
                     />
                   </div>
                   <div>
-                
-     <p  className="font-semibold pb-2 capitalize text-md"> <label htmlFor="selectOption">Cours Type</label></p>
-      <select required className="p-3 select select-bordered w-full max-w-xs" id="selectOption" onChange={handleSelectChange}>
-        <option  className="select select-bordered w-full max-w-xs" value="" selected>please select your cours tupe </option>
-        <option className="select select-bordered w-full max-w-xs" value="Academic">Academic</option>
-        <option className="select select-bordered w-full max-w-xs" value="universityAdmission">University-Test</option>
-        <option className="select select-bordered w-full max-w-xs" value="jobpreParetion">Jobs-Preparession</option>
-
-      </select>
-     
-    </div>
+                    <p className="font-semibold pb-2 capitalize text-md">
+                      {" "}
+                      <label htmlFor="selectOption">Cours Type</label>
+                    </p>
+                    <select
+                      required
+                      className="p-3 select select-bordered w-full max-w-xs"
+                      id="selectOption"
+                      onChange={handleSelectChange}
+                    >
+                      <option
+                        className="select select-bordered w-full max-w-xs"
+                        value=""
+                        selected
+                      >
+                        please select your cours tupe{" "}
+                      </option>
+                      <option
+                        className="select select-bordered w-full max-w-xs"
+                        value="Academic"
+                      >
+                        Academic
+                      </option>
+                      <option
+                        className="select select-bordered w-full max-w-xs"
+                        value="universityAdmission"
+                      >
+                        University-Test
+                      </option>
+                      <option
+                        className="select select-bordered w-full max-w-xs"
+                        value="jobpreParetion"
+                      >
+                        Jobs-Preparession
+                      </option>
+                    </select>
+                  </div>
 
                   <div>
                     <p className="font-semibold mb-2">Course Image</p>
@@ -213,7 +231,6 @@ const CoursePost = () => {
                       placeholder="Taka:5000"
                       name="price"
                       type="number"
-
                       className="input input-bordered w-full"
                     />
                   </div>
@@ -280,7 +297,7 @@ const CoursePost = () => {
                           type="text"
                           className="input input-bordered w-full mb-3"
                           value={keyp.name}
-                          onChange={(event) => handleKeypointName(index, event)}
+                          onChange={event => handleKeypointName(index, event)}
                         />
                       </label>
                     </div>
@@ -317,7 +334,7 @@ const CoursePost = () => {
                           type="text"
                           value={chapter.name}
                           className="input input-bordered w-full mb-2"
-                          onChange={(event) =>
+                          onChange={event =>
                             handleChapterNameChange(index, event)
                           }
                         />
@@ -328,7 +345,7 @@ const CoursePost = () => {
                         <input
                           value={chapter.details}
                           className="input input-bordered w-full"
-                          onChange={(event) =>
+                          onChange={event =>
                             handleChapterDetailsChange(index, event)
                           }
                         />

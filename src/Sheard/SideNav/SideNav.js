@@ -29,101 +29,80 @@ const SideNav = () => {
 
 
   return (
-
     <div className="">
-
       <ul className="ml-10 mt-6">
-
         {/* Admin Avatar */}
 
-        <AdminAvatar/>
+        <AdminAvatar />
 
+        {isAdmin && (
+          <>
+            <li className="mt-5 mb-5 text-xl font-bold">
+              <Link to="/dashboard" className="hover:text-blue-500">
+                Dashboard
+              </Link>
+            </li>
 
-     {
-      isAdmin &&  <>
-      
-      <li className="mt-5 mb-5 text-xl font-bold">
+            <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+              <Link to="/allusers">Users</Link>
+            </li>
 
-<Link to="/dashboard" className="hover:text-blue-500">
-  
-  Dashboard
+            <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+              <Link> Student </Link>
+            </li>
+            <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+              <Link to="/thecher"> Thecher </Link>
+            </li>
 
-</Link>
+            <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700"></li>
 
-</li>
+            <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+              <Link to="/adminDashbord/course">Course</Link>
+            </li>
+            <Link to="/adminDashbord/books">
+              <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+                Book Store
+              </li>
+            </Link>
+            <Link to="/adminDashbord/questionbank">
+              <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+                Question Bank
+              </li>
+            </Link>
+          </>
+        )}
 
-<li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+        {isThecher && (
+          <>
+            <Link to="/thecherdashbord">
+              <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+                Courses
+              </li>{" "}
+            </Link>
+            <Link to="/theacherBookDashbord">
+              {" "}
+              <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+                Books
+              </li>
+            </Link>
+            <Link to="/teacherQuestionbank">
+              {" "}
+              <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
+                Question-Bank
+              </li>
+            </Link>
+          </>
+        )}
 
-<Link to="/allusers">Users</Link>
-
-</li>
-
-<li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
-
-<Link> Student </Link>
-
-</li>
-<li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
-
-<Link to="/thecher">  Thecher </Link>
-
-</li>
-
-
-<li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
-
-
-
-</li>
-
-<li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
-
-<Link > Job Preparation </Link>
-
-</li>
-
-<li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
-
-<Link> Admission Test </Link>
-
-</li>
-
-<li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
-
-<Link> Book Store </Link>
-
-</li>
-
-<li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
-
-<Link> Question Bank </Link>
-
-</li>
-      
-      </>
-     }
-
-{
-  isThecher  &&
-  <>
-  <Link to="/thecherdashbord"><li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">Courses</li> </Link>
-  <Link to="/theacherBookDashbord">  <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
-Books
-</li></Link>
-  <Link to="/teacherQuestionbank">  <li className="mt-5 mb-5 text-xl font-semibold hover:text-blue-700">
-Question-Bank
-</li></Link>
-
-</>
-}
-
-
-<button onClick={logOutAdmin} className="bg-red-500 mt-10 px-5 py-1 text-white font-semibold mb-5"> Log Out </button>
-        
+        <button
+          onClick={logOutAdmin}
+          className="bg-red-500 mt-10 px-5 py-1 text-white font-semibold mb-5"
+        >
+          {" "}
+          Log Out{" "}
+        </button>
       </ul>
-
     </div>
-
   );
 
 };

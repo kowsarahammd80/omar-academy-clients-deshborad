@@ -128,7 +128,10 @@ const BookPost = () => {
       formData.append("authorimg",authorimg);
       formData.append("bookimg",bookimg);
       formData.append("aboutbook",aboutbook);
-      formData.append("owner",user?.email);
+      formData.append("owner", user?.email);
+      formData.append("ownerName", user?.displayName);
+      formData.append("ownerimg", user?.photoURL);
+      
        
   
       axios
